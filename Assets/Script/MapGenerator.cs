@@ -24,7 +24,8 @@ public class MapGenerator : MonoBehaviour {
     
     private GameObject Map;
 
-    void Start () {
+    void Start()
+    {
         MapGenerate();
     }
 	
@@ -38,7 +39,7 @@ public class MapGenerator : MonoBehaviour {
         Map.isStatic = true;
 
         NoiseGenerate(0, 0);
-        BlockGenerate();        
+        BlockGenerate();
     }
 
     void BlockGenerate()
@@ -66,7 +67,7 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int z = 0; z < MapWidth; z++)
             {
-                for (int y = (int)heightArr[x, z]; y < WaterLevelHeight; y++)
+                for (int y = (int)heightArr[x, z]+1; y < WaterLevelHeight; y++)
                 {
                     GameObject newBlock = Instantiate(Blocks[5], new Vector3(x, y, z), Quaternion.identity, Map.transform);
                 }

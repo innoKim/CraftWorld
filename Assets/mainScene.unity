@@ -149,13 +149,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Blocks:
-  - {fileID: 1174331637468546, guid: cd4f3d30548980942a044ef46658df92, type: 2}
-  - {fileID: 1616061009784692, guid: 4d05672486b02e04bad9668722b3c75b, type: 2}
-  - {fileID: 1669152869354144, guid: 2df3716f9ec00e340befde9e199090da, type: 2}
-  - {fileID: 1043051210972042, guid: 12a42f163b22fbe4d89fa6c8b092dacf, type: 2}
-  - {fileID: 1843264650213066, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-  - {fileID: 1873970820286442, guid: c86c7451319be364e887794f7301cda2, type: 2}
-  - {fileID: 1307965201295994, guid: 2d0ce448326c69341aae88843d181893, type: 2}
+  - {fileID: 1947887465398448, guid: cd4f3d30548980942a044ef46658df92, type: 2}
+  - {fileID: 1161109887597686, guid: 4d05672486b02e04bad9668722b3c75b, type: 2}
+  - {fileID: 1270682850719258, guid: 2df3716f9ec00e340befde9e199090da, type: 2}
+  - {fileID: 1909679179013516, guid: 12a42f163b22fbe4d89fa6c8b092dacf, type: 2}
+  - {fileID: 1903045495211536, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
+  - {fileID: 1365049496552862, guid: c86c7451319be364e887794f7301cda2, type: 2}
+  - {fileID: 1439273642388076, guid: 2d0ce448326c69341aae88843d181893, type: 2}
   MapWidth: 30
   MapDepth: 30
   WaterLevelHeight: 3
@@ -266,6 +266,7 @@ MonoBehaviour:
   RotSpd: 60
   JumpPower: 250
   isGround: 0
+  isWater: 0
 --- !u!135 &321582556
 SphereCollider:
   m_ObjectHideFlags: 0
