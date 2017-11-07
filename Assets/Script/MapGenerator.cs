@@ -61,6 +61,7 @@ public class MapGenerator : MonoBehaviour {
             }
         }
     }
+
     void WaterGenerate()
     {
         for (int x = 0; x < MapWidth; x++)
