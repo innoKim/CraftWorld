@@ -12,6 +12,7 @@ public class MapGenerator : MonoBehaviour {
         Rock,
         Metal,
         Water,
+        Soil2,
         None,
     }
 
@@ -50,15 +51,16 @@ public class MapGenerator : MonoBehaviour {
         Map = new GameObject("Map");
         Map.isStatic = true;
 
-        NoiseGenerate(0, 0);
+        NoiseGenerate();
 
         ObjMapGenerate();
+
         BlockGenerate();
     }
 
     void ObjMapGenerate()
     {
-        objmapArr = new ObjType[MapWidth, (int)heightScale, MapDepth];
+        objmapArr = new ObjType[MapWidth, (int)heightScale+1, MapDepth];
 
         for (int x = 0; x < MapWidth; x++)
         {
@@ -102,7 +104,8 @@ public class MapGenerator : MonoBehaviour {
             {
                 for (int y = 0; y < heightArr[x, z]; y++)
                 {
-                    objmapArr[x, y, z] = ObjType.Soil;
+                    if (y == (int)heightArr[x, z]) objmapArr[x, y, z] = ObjType.Soil;
+                    else objmapArr[x, y, z] = ObjType.Soil2;
                 }               
             }
         }
@@ -130,7 +133,8 @@ public class MapGenerator : MonoBehaviour {
             int xRand = Random.Range(0, MapWidth);
             int zRand = Random.Range(0, MapDepth);
 
-            if (objmapArr[xRand, (int)heightArr[xRand, zRand]+1, zRand] == ObjType.None)
+            if ((int)heightArr[xRand, zRand]< (int)heightScale
+                && objmapArr[xRand, (int)heightArr[xRand, zRand]+1, zRand] == ObjType.None)
             {
                 objmapArr[xRand, (int)heightArr[xRand, zRand] + 1, zRand] = ObjType.Rock;
             }
@@ -152,7 +156,7 @@ public class MapGenerator : MonoBehaviour {
         }
     }
 
-    void NoiseGenerate(int xOrg, int zOrg)
+    void NoiseGenerate()
     {
         heightArr = new float[MapWidth,MapDepth];
 
