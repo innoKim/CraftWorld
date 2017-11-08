@@ -155,11 +155,11 @@ MonoBehaviour:
   - {fileID: 1905724043066826, guid: 4ff461b7e8acdfe4ea98c218b4c875c7, type: 2}
   - {fileID: 1055825387802708, guid: fcd008b7fd1fc0946809dfab55d48bfc, type: 2}
   - {fileID: 1870358879888946, guid: b1f214825ec02724e9cc8f29b11c28c0, type: 2}
-  MapWidth: 40
-  MapDepth: 40
-  WaterLevelHeight: 4
+  MapWidth: 30
+  MapDepth: 30
+  WaterLevelHeight: 3
   perlinScale: 4
-  heightScale: 8
+  heightScale: 6
   xSeed: 255
   zSeed: 255
 --- !u!1 &321582549
