@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(Vector3.up * JumpPower);
             isGround = false;
         }
+        else if(isWater && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * JumpPower);
+        }
     }
     void Move()
     {
@@ -47,7 +51,7 @@ public class PlayerController : MonoBehaviour {
         if(other.CompareTag("Water"))
         {
             isWater = true;
-            rb.drag = 0.5f;
+            rb.drag = 5.0f;
         }
     }
 

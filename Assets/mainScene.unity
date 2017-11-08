@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -108,48 +108,6 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &83990279
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823005164553746, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: cfc3ecba8e7cc1a468abd873ebedad98, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &141687141
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &141687142
 Transform:
   m_ObjectHideFlags: 0
@@ -191,18 +149,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Blocks:
-  - {fileID: 1034548744589794, guid: 5e57651c404ed754794bb69ac461f139, type: 2}
-  - {fileID: 1034548744589794, guid: 5e57651c404ed754794bb69ac461f139, type: 2}
-  - {fileID: 1270682850719258, guid: 2df3716f9ec00e340befde9e199090da, type: 2}
-  - {fileID: 1909679179013516, guid: 12a42f163b22fbe4d89fa6c8b092dacf, type: 2}
-  - {fileID: 1034548744589794, guid: 5e57651c404ed754794bb69ac461f139, type: 2}
-  - {fileID: 1034548744589794, guid: 5e57651c404ed754794bb69ac461f139, type: 2}
-  - {fileID: 0}
-  MapWidth: 80
-  MapDepth: 80
-  WaterLevelHeight: 6
-  perlinScale: 6
-  heightScale: 12
+  - {fileID: 1618138802598304, guid: 05853183e77fbe64691069bfe34ce71f, type: 2}
+  - {fileID: 1651542089806198, guid: d2e68b864c2237f43a0be68703000583, type: 2}
+  - {fileID: 1581327076598982, guid: 9a2f37fdc1aa97445990472d79cd3435, type: 2}
+  - {fileID: 1905724043066826, guid: 4ff461b7e8acdfe4ea98c218b4c875c7, type: 2}
+  - {fileID: 1055825387802708, guid: fcd008b7fd1fc0946809dfab55d48bfc, type: 2}
+  - {fileID: 1870358879888946, guid: b1f214825ec02724e9cc8f29b11c28c0, type: 2}
+  MapWidth: 40
+  MapDepth: 40
+  WaterLevelHeight: 4
+  perlinScale: 4
+  heightScale: 8
   xSeed: 255
   zSeed: 255
 --- !u!1 &321582549
@@ -416,13 +373,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1782438024}
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 2, z: -5}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 3, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &1782438030
 MonoBehaviour:
   m_ObjectHideFlags: 0

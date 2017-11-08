@@ -1,23 +1,15 @@
 fileFormatVersion: 2
-guid: 6caddac1d3a133b4192acf3ad3084c9f
-timeCreated: 1510056011
+guid: ee6dc906a49480441a4c0b0763d077b5
+timeCreated: 1510099756
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Camera
-    100002: Cube
-    100004: Lamp
-    100006: //RootNode
-    400000: Camera
-    400002: Cube
-    400004: Lamp
-    400006: //RootNode
-    2000000: Camera
-    2300000: Cube
-    3300000: Cube
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Cube
-    10800000: Lamp
   materials:
     importMaterials: 1
     materialName: 0
@@ -45,7 +37,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 50
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
