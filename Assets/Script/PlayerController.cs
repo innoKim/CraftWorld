@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
+        ObjectManager.Instance.player = this.gameObject;
 	}
 	
 	// Update is called once per frame

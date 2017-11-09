@@ -4,35 +4,6 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
 
-    private enum ObjType
-    {
-        Soil,
-        Sand,
-        Gravel,
-        Stone,
-        Metal,
-        Water,
-        Soil2,
-        Tree,
-        Rock,
-        None,
-    }
-
-    private enum TreeType
-    {
-        Bush,
-        Tree1,
-        Tree2,
-        Tree3,
-        None
-    }
-
-    private enum RockType
-    {
-        Rock,
-        None
-    }
-
     public List<GameObject> Blocks;
     public List<GameObject> Trees;
     public List<GameObject> Rocks;
@@ -56,8 +27,6 @@ public class MapGenerator : MonoBehaviour {
 
     public int xSeed;
     public int zSeed;
-
-    private ObjType[,,] objmapArr;
 
     private float[,] heightArr;
 
@@ -85,8 +54,8 @@ public class MapGenerator : MonoBehaviour {
     }
 
     void ObjMapGenerate()
-    {
-        objmapArr = new ObjType[MapWidth, MapHeight, MapDepth];
+    { 
+        ObjectManager.Instance.InitObjArr(MapWidth, MapHeight, MapDepth);
 
         for (int x = 0; x < MapWidth; x++)
         {
@@ -94,7 +63,7 @@ public class MapGenerator : MonoBehaviour {
             {
                 for (int z = 0; z < MapWidth; z++)
                 {
-                    objmapArr[x, y, z] = ObjType.None;
+                    ObjectManager.Instance.objArr[x, y, z] = ObjectManager.ObjType.None;
                 }
             }
         }
@@ -115,28 +84,33 @@ public class MapGenerator : MonoBehaviour {
             {
                 for (int z = 0; z < MapWidth; z++)
                 {
-                    switch (objmapArr[x, y, z])
+                    switch (ObjectManager.Instance.objArr[x, y, z])
                     {
-                        case ObjType.None:
+                        case ObjectManager.ObjType.None:
                             continue;
                             break;
-                        case ObjType.Tree:
+                        case ObjectManager.ObjType.Tree:
                             {
-                                int ranNum = Random.Range(0, (int)TreeType.None);
+                                int ranNum = Random.Range(0, (int)ObjectManager.TreeType.None);
                                 GameObject newTree = Instantiate(Trees[ranNum], new Vector3(x, y - 0.3f, z), Quaternion.Euler(-90, Random.RandomRange(0.0f, 360.0f), 0), Map.transform);
-                                if (ranNum == (int)TreeType.Bush) newTree.transform.localScale = new Vector3(1, 1, 1) * Random.Range(0.8f, 1.2f);
+                                if (ranNum == (int)ObjectManager.TreeType.Bush) newTree.transform.localScale = new Vector3(1, 1, 1) * Random.Range(0.8f, 1.2f);
                                 else newTree.transform.localScale = new Vector3(1, 1, 1) * Random.Range(0.4f, 0.6f);
                             }
                             break;
-                        case ObjType.Rock:
+                        case ObjectManager.ObjType.Rock:
                             {
-                                int ranNum = Random.Range(0, (int)RockType.None);
+                                int ranNum = Random.Range(0, (int)ObjectManager.RockType.None);
                                 GameObject newRock = Instantiate(Rocks[ranNum], new Vector3(x, y-0.3f, z), Quaternion.Euler(-90, Random.RandomRange(0.0f, 360.0f), 0), Map.transform);
                                 newRock.transform.localScale = new Vector3(1, 1, 1) * Random.Range(0.5f, 1.5f);
                             }
                             break;
+                        case ObjectManager.ObjType.Water:
+                            {
+                                GameObject newWater = Instantiate(Blocks[(int)ObjectManager.Instance.objArr[x, y, z]], new Vector3(x, y, z), Quaternion.identity, Map.transform);
+                            }
+                            break;
                         default:
-                            GameObject newBlock = Instantiate(Blocks[(int)objmapArr[x, y, z]], new Vector3(x, y, z), Quaternion.identity, Map.transform);
+                            GameObject newBlock = Instantiate(Blocks[(int)ObjectManager.Instance.objArr[x, y, z]], new Vector3(x, y, z), Quaternion.identity, Map.transform);
                             break;
                     }
                 }
@@ -154,11 +128,11 @@ public class MapGenerator : MonoBehaviour {
                 {
                     if (y == (int)heightArr[x, z])
                     {
-                        objmapArr[x, y, z] = BlendGenerate(ObjType.Soil, ObjType.Soil2, 0.9f);
+                        ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil, ObjectManager.ObjType.Soil2, 0.9f);
 
-                        //if (objmapArr[x, y, z] == ObjType.Soil) objmapArr[x, y + 1, z] = BlendGenerate(ObjType.None, ObjType.Tree, 9, 1);
+                        //if (ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.Soil) ObjectManager.Instance.objArr[x, y + 1, z] = BlendGenerate(ObjectManager.ObjType.None, ObjectManager.ObjType.Tree, 9, 1);
                     }
-                    else objmapArr[x, y, z] = BlendGenerate(ObjType.Soil2, ObjType.Metal, 0.8f);
+                    else ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil2, ObjectManager.ObjType.Metal, 0.8f);
                 }
             }
         }
@@ -172,9 +146,9 @@ public class MapGenerator : MonoBehaviour {
             {
                 for (int z = 0; z < MapWidth; z++)
                 {
-                    if (objmapArr[x, y, z] == ObjType.Soil || objmapArr[x, y, z] == ObjType.Soil2)
-                        if (IsNeighbourOf(ObjType.Water, x, y, z))
-                            objmapArr[x, y, z] = BlendGenerate(ObjType.Soil2, ObjType.Sand, 0.3f);
+                    if (ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.Soil || ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.Soil2)
+                        if (IsNeighbourOf(ObjectManager.ObjType.Water, x, y, z))
+                            ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil2, ObjectManager.ObjType.Sand, 0.3f);
                 }
             }
         }
@@ -188,9 +162,9 @@ public class MapGenerator : MonoBehaviour {
             int yRand = (int)Random.Range(0, heightScale);
             int zRand = Random.Range(0, MapDepth);
 
-            if (objmapArr[xRand, yRand, zRand] != ObjType.None)
+            if (ObjectManager.Instance.objArr[xRand, yRand, zRand] != ObjectManager.ObjType.None)
             {
-                objmapArr[xRand, yRand, zRand] = ObjType.Metal;
+                ObjectManager.Instance.objArr[xRand, yRand, zRand] = ObjectManager.ObjType.Metal;
             }
         }
     }
@@ -203,8 +177,8 @@ public class MapGenerator : MonoBehaviour {
             {
                 for (int y = (int)heightArr[x, z] + 1; y < WaterLevelHeight; y++)
                 {
-                    if (objmapArr[x, y, z] == ObjType.None)
-                        objmapArr[x, y, z] = ObjType.Water;
+                    if (ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.None)
+                        ObjectManager.Instance.objArr[x, y, z] = ObjectManager.ObjType.Water;
                 }
             }
         }
@@ -217,9 +191,9 @@ public class MapGenerator : MonoBehaviour {
             {
                 for (int z = 0; z < MapWidth; z++)
                 {
-                    if (objmapArr[x, y, z] == ObjType.Soil || objmapArr[x, y, z] == ObjType.Soil2)
-                        if (IsNeighbourOf(ObjType.Water, x, y, z))
-                            objmapArr[x, y, z] = ObjType.Soil2;
+                    if (ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.Soil || ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.Soil2)
+                        if (IsNeighbourOf(ObjectManager.ObjType.Water, x, y, z))
+                            ObjectManager.Instance.objArr[x, y, z] = ObjectManager.ObjType.Soil2;
                 }
             }
         }
@@ -238,7 +212,7 @@ public class MapGenerator : MonoBehaviour {
         }
     }
 
-    bool IsNeighbourOf(ObjType targetObjType, int x, int y, int z)
+    bool IsNeighbourOf(ObjectManager.ObjType targetObjType, int x, int y, int z)
     {
         for (int i = -1; i <= 1; i++)
         {
@@ -249,7 +223,7 @@ public class MapGenerator : MonoBehaviour {
                     if (y + j < 0 || y + j >= MapHeight || x + i < 0 || x + i >= MapWidth || z + k < 0 || z + k >= MapDepth) continue;
                     if (i == 0 && j == 0 && k == 0) continue;
 
-                    if (objmapArr[x + i, y + j, z + k] == targetObjType)
+                    if (ObjectManager.Instance.objArr[x + i, y + j, z + k] == targetObjType)
                         return true;
                 }
             }
@@ -267,9 +241,9 @@ public class MapGenerator : MonoBehaviour {
             {
                 if (heightArr[i, j] < WaterLevelHeight) continue;
 
-                if(objmapArr[i,(int)heightArr[i,j],j] == ObjType.Soil)
+                if(ObjectManager.Instance.objArr[i,(int)heightArr[i,j],j] == ObjectManager.ObjType.Soil)
                 {
-                    objmapArr[i, (int)heightArr[i, j] + 1, j] = BlendGenerate(ObjType.Tree, ObjType.None, treeRatio);
+                    ObjectManager.Instance.objArr[i, (int)heightArr[i, j] + 1, j] = BlendGenerate(ObjectManager.ObjType.Tree, ObjectManager.ObjType.None, treeRatio);
                 }
             }
         }
@@ -283,13 +257,13 @@ public class MapGenerator : MonoBehaviour {
             {
                 if (heightArr[i, j] < WaterLevelHeight) continue;
 
-                if(objmapArr[i, (int)heightArr[i, j] + 1, j] == ObjType.None)
-                    objmapArr[i, (int)heightArr[i, j] + 1, j] = BlendGenerate(ObjType.Rock, ObjType.None, RockRatio);
+                if(ObjectManager.Instance.objArr[i, (int)heightArr[i, j] + 1, j] == ObjectManager.ObjType.None)
+                    ObjectManager.Instance.objArr[i, (int)heightArr[i, j] + 1, j] = BlendGenerate(ObjectManager.ObjType.Rock, ObjectManager.ObjType.None, RockRatio);
             }
         }
     }
 
-    ObjType BlendGenerate(ObjType A, ObjType B, float ratio)
+    ObjectManager.ObjType BlendGenerate(ObjectManager.ObjType A, ObjectManager.ObjType B, float ratio)
     {
         float randomNum = Random.Range(0.0f, 1.0f);
 

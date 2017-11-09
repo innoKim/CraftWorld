@@ -163,13 +163,13 @@ MonoBehaviour:
   - {fileID: 119206, guid: db9e8f7bc8c5778479ddc55486de4558, type: 2}
   Rocks:
   - {fileID: 162500, guid: 568b15b1fe7027049b35d9c4fbe502ba, type: 2}
-  MapWidth: 40
-  MapDepth: 40
+  MapWidth: 100
+  MapDepth: 100
   MapHeight: 30
-  WaterLevelHeight: 4
-  perlinScale: 3
-  heightScale: 8
-  treeRatio: 0.25
+  WaterLevelHeight: 6
+  perlinScale: 8
+  heightScale: 12
+  treeRatio: 0.2
   RockRatio: 0.05
   xSeed: 56
   zSeed: 53
@@ -359,7 +359,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 50
+  far clip plane: 40
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -367,7 +367,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -385,7 +385,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1782438024}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 3, z: -6}
+  m_LocalPosition: {x: 0, y: 2, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

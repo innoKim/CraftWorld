@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
     
     public Transform targetTransform;
+
     private Vector3 offSet;
     private Vector3 curPosition;
     private Quaternion curRot;
