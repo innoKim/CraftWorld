@@ -22,7 +22,7 @@ public class CameraControl : MonoBehaviour {
         if (targetTransform)
         {
             transform.position = curPosition + targetTransform.rotation* offSet;
-            transform.rotation = targetTransform.rotation;
+            transform.rotation = targetTransform.rotation*curRot;
 
             curPosition = targetTransform.position * 0.05f + curPosition * 0.95f;
         }
