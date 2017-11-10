@@ -3,33 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour {
-    
-    public Transform targetTransform;
 
-    private Vector3 offSet;
-    private Vector3 curPosition;
-    private Quaternion curRot;
-    private float rotSpd;
-    private float rot = 0.0f;
-    // Use this for initialization
+    public Transform target;
+
+    [Range(5.0f,20.0f)]
+    public float MaxCameraDistance;
+
+    [Range(1.0f, 5.0f)]
+    public float MinCameraDistance;
+
+    [Range(0.0f,5.0f)]
+    public float CameraZoomSpd;
+
+    [Range(0.0f, 2.0f)]
+    public float CameraRotationSpd;
+
+    float distanceFromTarget;
+    Vector3 direction;
+
+    //for MouseDrag
+    Vector3 startPt;
+    Vector3 deltaPt;
+
     void Start()
     {
-        curPosition = targetTransform.position;
-        offSet = this.transform.position;
-        curRot = transform.rotation;
-        rotSpd = targetTransform.gameObject.GetComponent<PlayerController>().RotSpd;
+        distanceFromTarget = transform.localPosition.magnitude;
+        direction = transform.rotation.eulerAngles;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        rot += Input.GetAxisRaw("Horizontal") * rotSpd * Time.deltaTime;
+        ScreenRotation();
+        Zoom();
 
-        if (targetTransform)
+        transform.position = target.position + Quaternion.Euler(direction.x,direction.y,direction.z)*Vector3.forward * distanceFromTarget;
+        transform.LookAt(target.position);
+    }
+
+    void ScreenRotation()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse2))
         {
-            transform.position = targetTransform.position + transform.rotation* offSet;
-            transform.rotation = Quaternion.Euler(new Vector3(0,rot,0)) * curRot;
-            curPosition = targetTransform.position * 0.05f + curPosition * 0.95f;
+            startPt = Input.mousePosition;
         }
+        else if (Input.GetKey(KeyCode.Mouse2))
+        {
+            deltaPt = Input.mousePosition - startPt;
+            direction = direction + new Vector3(deltaPt.y, deltaPt.x, 0)* CameraRotationSpd;
+            startPt = Input.mousePosition;
+        }
+    }
+    void Zoom()
+    {
+        distanceFromTarget -=Input.GetAxisRaw("Mouse ScrollWheel") * CameraZoomSpd;
+
+        if (distanceFromTarget < MinCameraDistance) distanceFromTarget = MinCameraDistance;
+        if (distanceFromTarget > MaxCameraDistance) distanceFromTarget = MaxCameraDistance;
     }
 }

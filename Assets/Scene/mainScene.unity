@@ -163,12 +163,12 @@ MonoBehaviour:
   - {fileID: 119206, guid: db9e8f7bc8c5778479ddc55486de4558, type: 2}
   Rocks:
   - {fileID: 162500, guid: 568b15b1fe7027049b35d9c4fbe502ba, type: 2}
-  MapWidth: 30
-  MapDepth: 30
+  MapWidth: 100
+  MapDepth: 100
   MapHeight: 30
-  WaterLevelHeight: 4
-  perlinScale: 4
-  heightScale: 8
+  WaterLevelHeight: 6
+  perlinScale: 10
+  heightScale: 12
   treeRatio: 0.2
   RockRatio: 0.05
   xSeed: 56
@@ -329,7 +329,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -346,13 +346,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1782438024}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
   m_LocalPosition: {x: 0, y: 2, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
 --- !u!114 &1782438030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +364,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ee806a4d9f726469e5402ed6ebba10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 1953480140}
+  target: {fileID: 1953480140}
+  MaxCameraDistance: 10
+  MinCameraDistance: 1
+  CameraZoomSpd: 2
+  CameraRotationSpd: 0.5
 --- !u!1 &1953480134 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100074, guid: 9eaf2f5a8de53c549a0b6fa97b9ebc52, type: 3}
@@ -380,12 +384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526e9e593a1dacb448872980f067b70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpd: 2
+  MoveSpd: 1.5
   RotSpd: 60
   JumpPower: 250
   isGround: 0
   isWater: 0
-  lookDirection: {x: 0, y: 0, z: 0, w: 0}
   CameraTransform: {fileID: 1782438029}
 --- !u!136 &1953480136
 CapsuleCollider:
@@ -397,7 +400,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 0.9
+  m_Height: 0.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!135 &1953480137
@@ -411,7 +414,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
-  m_Center: {x: 0, y: 0.12, z: 0}
+  m_Center: {x: 0, y: 0.18, z: 0}
 --- !u!54 &1953480138
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -503,10 +506,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1980986288}
-  m_LocalRotation: {x: 0.48296294, y: 0.22414392, z: -0.12940955, w: 0.8365163}
+  m_LocalRotation: {x: 0.65257, y: 0.19082147, z: -0.17485563, w: 0.7121553}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 60, y: 30, z: 0}
+  m_LocalEulerAnglesHint: {x: 85, y: 30, z: 0}
