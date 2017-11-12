@@ -5,18 +5,22 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
 
     public Transform target;
+    public Vector3 lerpPosition;
 
-    [Range(5.0f,20.0f)]
+    [Range(5.0f, 20.0f)]
     public float MaxCameraDistance;
 
     [Range(1.0f, 5.0f)]
     public float MinCameraDistance;
 
-    [Range(0.0f,5.0f)]
+    [Range(0.0f, 5.0f)]
     public float CameraZoomSpd;
 
     [Range(0.0f, 2.0f)]
     public float CameraRotationSpd;
+
+    [Range(0.0f, 100.0f)]
+    public float CameraTrackSpd;
 
     float distanceFromTarget;
     Vector3 direction;
@@ -36,8 +40,10 @@ public class CameraControl : MonoBehaviour {
         ScreenRotation();
         Zoom();
 
-        transform.position = target.position + Quaternion.Euler(direction.x,direction.y,direction.z)*Vector3.forward * distanceFromTarget;
-        transform.LookAt(target.position);
+        lerpPosition = Vector3.Lerp(lerpPosition, target.position, CameraTrackSpd*0.001f);
+
+        transform.position = lerpPosition + Quaternion.Euler(direction.x,direction.y,direction.z)*Vector3.forward * distanceFromTarget;
+        transform.LookAt(lerpPosition);
     }
 
     void ScreenRotation()

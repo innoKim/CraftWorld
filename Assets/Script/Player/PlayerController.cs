@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float MoveSpd;
     private Vector3 lerpDir;
+    private Vector3 moveDir;
 
     public float RotSpd;
     public float JumpPower;
@@ -15,32 +16,41 @@ public class PlayerController : MonoBehaviour {
 
     public bool isGround;
     public bool isWater;
-    
-    public Transform CameraTransform;
+    public bool isPunching;
+    public bool isJumping;
+
+    private AttackColider ac;
+    private Camera cam;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        ac = GetComponentInChildren<AttackColider>();
+        cam = Camera.main.GetComponent<Camera>();
 
         ObjectManager.Instance.player = this.gameObject;
-        lerpDir = Quaternion.Euler(new Vector3(0, CameraTransform.rotation.eulerAngles.y, 0))*Vector3.forward;
+        lerpDir = Quaternion.Euler(new Vector3(0, cam.transform.rotation.eulerAngles.y, 0)) * Vector3.forward;
     }
 
     void Update() {
         Move();
         Jump();
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("isPunching");
+            if (!isPunching) StartCoroutine("Punch");
         }
     }
 
     void Jump()
     {
+        if (isPunching) return;
+
         if (isGround && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * JumpPower);
             isGround = false;
+            anim.SetTrigger("isJumping");
         }
         else if (isWater && Input.GetKeyDown(KeyCode.Space))
         {
@@ -50,12 +60,17 @@ public class PlayerController : MonoBehaviour {
 
     void Move()
     {
-        Vector3 inputDir = (Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal")).normalized;
-        Vector3 moveDir = Quaternion.Euler(new Vector3(0, CameraTransform.rotation.eulerAngles.y, 0)) * inputDir;
+        lerpDir = Vector3.Slerp(lerpDir, moveDir, 0.1f);
+        transform.LookAt(transform.position + lerpDir);
 
-        if(moveDir.sqrMagnitude>=0.1f)
+        if (isPunching && isGround) return;
+        if (isGround && isJumping) return;
+
+        Vector3 inputDir = (Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal")).normalized;
+        moveDir = Quaternion.Euler(new Vector3(0, cam.transform.rotation.eulerAngles.y, 0)) * inputDir;
+
+        if (moveDir.sqrMagnitude >= 0.1f)
         {
-            lerpDir = Vector3.Slerp(lerpDir, moveDir, 0.1f);
             anim.SetBool("isMoving", true);
         }
         else anim.SetBool("isMoving", false);
@@ -71,14 +86,12 @@ public class PlayerController : MonoBehaviour {
             moveVelocity = moveDir * MoveSpd;
             anim.SetBool("isRunning", false);
         }
-
-        transform.LookAt(transform.position + lerpDir);
         transform.position += moveVelocity * Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Terrain"))
+        if (other.CompareTag("Terrain") || other.CompareTag("Tree")||other.CompareTag("Rock"))
         {
             isGround = true;
         }
@@ -97,5 +110,30 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    
+    private IEnumerator Punch()
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Vector3 deltaVector = new Vector3();
+        bool hitted = Physics.Raycast(ray, out hit, 100.0f);
+
+        if (hitted)
+        {
+            deltaVector = hit.point - (transform.position+Vector3.up*0.5f);
+            moveDir = new Vector3(deltaVector.x, 0, deltaVector.z).normalized;
+        }
+
+        isPunching = true;
+        yield return new WaitForSeconds(0.3f);
+
+        if (hitted&&deltaVector.sqrMagnitude<2.0f) hit.collider.gameObject.SendMessage("Damaged");
+
+        yield return new WaitForSeconds(0.5f);
+        isPunching = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + moveDir);
+    }
 }

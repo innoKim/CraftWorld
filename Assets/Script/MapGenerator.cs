@@ -87,7 +87,6 @@ public class MapGenerator : MonoBehaviour {
                     switch (ObjectManager.Instance.objArr[x, y, z])
                     {
                         case ObjectManager.ObjType.None:
-                            continue;
                             break;
                         case ObjectManager.ObjType.Tree:
                             {
@@ -127,12 +126,9 @@ public class MapGenerator : MonoBehaviour {
                 for (int y = 0; y < heightArr[x, z]; y++)
                 {
                     if (y == (int)heightArr[x, z])
-                    {
                         ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil, ObjectManager.ObjType.Soil2, 0.9f);
-
-                        //if (ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.Soil) ObjectManager.Instance.objArr[x, y + 1, z] = BlendGenerate(ObjectManager.ObjType.None, ObjectManager.ObjType.Tree, 9, 1);
-                    }
-                    else ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil2, ObjectManager.ObjType.Metal, 0.8f);
+                    else
+                        ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil2, ObjectManager.ObjType.Metal, 0.8f);
                 }
             }
         }
@@ -263,6 +259,7 @@ public class MapGenerator : MonoBehaviour {
         }
     }
 
+    //오브젝트 A 와 B 를 비율 ratio 만큼 나오도록 랜덤하게 뿌려준다.
     ObjectManager.ObjType BlendGenerate(ObjectManager.ObjType A, ObjectManager.ObjType B, float ratio)
     {
         float randomNum = Random.Range(0.0f, 1.0f);

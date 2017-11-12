@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33606616122618660}
   - component: {fileID: 23655840664933406}
   - component: {fileID: 65412292097035908}
+  - component: {fileID: 114060191667710536}
   m_Layer: 0
   m_Name: Soil2
   m_TagString: Terrain
@@ -93,3 +94,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000004, y: 1.0000004, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114060191667710536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1894270106577154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2409cca71c19241b4cf3830cbafb09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 3
+  curHp: 3
