@@ -38,9 +38,7 @@ public class ItemManager : MonoBehaviour {
         for (int i = 0; i < objs.Length; i++)
         {
             itemPool.Add(objs[i].name, objs[i]);
-            Debug.Log(objs[i].name + " is Loaded");
         }
-        Debug.Log("God na");
     }
 
     private Dictionary<string, int> inventory = null;
@@ -58,7 +56,6 @@ public class ItemManager : MonoBehaviour {
         {
             inventory.Add(itemName, 1);
         }
-        Debug.Log(itemName + "is Added to itemPool"); 
     }
 
     public GameObject GetItemFromInven(string itemName)
@@ -68,16 +65,12 @@ public class ItemManager : MonoBehaviour {
             inventory[itemName]--;
             if (inventory[itemName] <= 0) inventory.Remove(itemName);
             
-            Debug.Log(itemName + "is Drawed from Inventory");
-
             GameObject newObj = Instantiate(itemPool[itemName]);
             newObj.name = itemName;
             return newObj;
         }
         else
         {
-            Debug.Log("there is no such item in Inventory");
-
             return null;
         }        
     }
@@ -92,8 +85,6 @@ public class ItemManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("there is no such item in Pool");
-
             return null;
         }
     }

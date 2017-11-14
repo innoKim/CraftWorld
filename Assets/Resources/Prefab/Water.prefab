@@ -105,8 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26fbaca101f7ad4cb4549b365ffb0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1
-  curHp: 1
-  dropItems: []
-  dropProbability: 0
   amplitude: 0.3

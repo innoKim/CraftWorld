@@ -24,6 +24,7 @@ public class CameraControl : MonoBehaviour {
 
     float distanceFromTarget;
     public Vector3 direction;
+    Vector3 lerpRotation;
 
     //for MouseDrag
     Vector3 startPt;
@@ -41,8 +42,8 @@ public class CameraControl : MonoBehaviour {
         Zoom();
 
         lerpPosition = Vector3.Lerp(lerpPosition, target.position, CameraTrackSpd*0.001f);
-
-        transform.position = lerpPosition + Quaternion.Euler(direction.x,direction.y,direction.z)*Vector3.forward * distanceFromTarget;
+        lerpRotation = Vector3.Lerp(lerpRotation, direction, 0.1f);
+        transform.position = lerpPosition + Quaternion.Euler(lerpRotation.x, lerpRotation.y, lerpRotation.z)*Vector3.forward * distanceFromTarget;
         transform.LookAt(lerpPosition);
     }
 

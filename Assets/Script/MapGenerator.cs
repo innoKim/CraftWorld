@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MapGenerator : MonoBehaviour {
 
@@ -32,13 +33,19 @@ public class MapGenerator : MonoBehaviour {
 
     private GameObject Map;
 
+    public bool OcclusCulling;
+    public bool LightMapping;
+
     void Start()
     {
         MapGenerate();
     }
-
-    // Update is called once per frame
-    void Update() {
+       
+    private void OnDestroy()
+    {
+        StaticOcclusionCulling.Clear();
+        Lightmapping.ClearDiskCache();
+        Lightmapping.ClearLightingDataAsset();
     }
 
     void MapGenerate()
@@ -51,6 +58,9 @@ public class MapGenerator : MonoBehaviour {
         ObjMapGenerate();
 
         BlockGenerate();
+
+        if(LightMapping) LightmapBake();
+        if(OcclusCulling) OcclusionBake();        
     }
 
     void ObjMapGenerate()
@@ -270,5 +280,18 @@ public class MapGenerator : MonoBehaviour {
 
         if (randomNum < ratio) return A;
         else return B;
+    }
+
+    void OcclusionBake()
+    {
+        StaticOcclusionCulling.Compute();
+    }
+
+    void LightmapBake()
+    {
+        Lightmapping.Clear();
+        Lightmapping.bakedGI = true;
+        Lightmapping.realtimeGI = true;
+        Lightmapping.Bake();
     }
 }
