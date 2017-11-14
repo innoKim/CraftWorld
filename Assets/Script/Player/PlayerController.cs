@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 
     void Move()
     {
-        lerpDir = Vector3.Slerp(lerpDir, moveDir, 0.1f);
+        lerpDir = Vector3.Slerp(lerpDir, moveDir, RotSpd*Time.deltaTime);
         transform.LookAt(transform.position + lerpDir);
 
         if (isPunching && isGround) return;
@@ -100,6 +100,10 @@ public class PlayerController : MonoBehaviour {
             isWater = true;
             rb.drag = 5.0f;
         }
+        if(other.CompareTag("Item"))
+        {
+            Destroy(other.gameObject);
+        }
     }
     void OnTriggerExit(Collider other)
     {
@@ -126,7 +130,8 @@ public class PlayerController : MonoBehaviour {
         isPunching = true;
         yield return new WaitForSeconds(0.3f);
 
-        if (hitted&&deltaVector.sqrMagnitude<2.0f) hit.collider.gameObject.SendMessage("Damaged");
+        if (hitted&&deltaVector.sqrMagnitude<2.0f&&!hit.collider.CompareTag("Player"))
+            hit.collider.gameObject.SendMessage("Damaged");
 
         yield return new WaitForSeconds(0.5f);
         isPunching = false;

@@ -222,7 +222,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: .494093001
+      - time: .485566974
         functionName: Hit
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -231,6 +231,8 @@ ModelImporter:
         messageOptions: 0
       transformMask:
       - path: 
+        weight: 1
+      - path: Exporter
         weight: 1
       - path: Motion
         weight: 1
@@ -337,8 +339,6 @@ ModelImporter:
       - path: Motion/B_Pelvis/B_Spine/B_Spine1/B_Spine2/B_R_Clavicle/B_R_UpperArm/B_R_Forearm/B_R_Hand/B_R_Finger4/B_R_Finger41
         weight: 1
       - path: Motion/B_Pelvis/B_Spine/B_Spine1/B_Spine2/B_R_Clavicle/B_R_UpperArm/B_R_Forearm/B_R_Hand/B_R_Finger4/B_R_Finger41/B_R_Finger42
-        weight: 1
-      - path: RPG-Character-Mesh
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}

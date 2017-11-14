@@ -276,7 +276,7 @@ ModelImporter:
 
 
       MuscleClip ''RPG-Character@Unarmed-Jump''conversion warning: LeftHand average
-      position error 6.2 mm and maximum position error 16.0 mm at 100%
+      position error 6.3 mm and maximum position error 16.0 mm at 100%
 
 
       MuscleClip ''RPG-Character@Unarmed-Jump''conversion warning: RightUpperArm average
@@ -292,7 +292,7 @@ ModelImporter:
 
 
       MuscleClip ''RPG-Character@Unarmed-Jump''conversion warning: Head average position
-      error 15.4 mm and maximum position error 41.6 mm at 100%
+      error 15.3 mm and maximum position error 41.6 mm at 100%
 
 
       MuscleClip ''RPG-Character@Unarmed-Jump'' conversion warning: RightFoot average
@@ -330,14 +330,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: Jump
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask:
       - path: 
         weight: 1
@@ -484,6 +477,8 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
+      - path: Exporter
+        weight: 1
       - path: Motion
         weight: 1
       - path: Motion/B_Pelvis
@@ -590,8 +585,6 @@ ModelImporter:
         weight: 1
       - path: Motion/B_Pelvis/B_Spine/B_Spine1/B_Spine2/B_R_Clavicle/B_R_UpperArm/B_R_Forearm/B_R_Hand/B_R_Finger4/B_R_Finger41/B_R_Finger42
         weight: 1
-      - path: RPG-Character-Mesh
-        weight: 0
       maskType: 0
       maskSource: {fileID: 101100000, guid: 4ebc95c8618479f4d8251c7dafa10029, type: 2}
     isReadable: 1

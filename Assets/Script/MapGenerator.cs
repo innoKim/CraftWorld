@@ -90,8 +90,9 @@ public class MapGenerator : MonoBehaviour {
                             break;
                         case ObjectManager.ObjType.Tree:
                             {
-                                int ranNum = Random.Range(0, (int)ObjectManager.TreeType.None);
+                                int ranNum = Random.Range(0, (int)ObjectManager.TreeType.None); 
                                 GameObject newTree = Instantiate(Trees[ranNum], new Vector3(x, y - 0.3f, z), Quaternion.Euler(-90, Random.RandomRange(0.0f, 360.0f), 0), Map.transform);
+                                newTree.SendMessage("SetObjType", ObjectManager.Instance.objArr[x, y, z]);
                                 if (ranNum == (int)ObjectManager.TreeType.Bush) newTree.transform.localScale = new Vector3(1, 1, 1) * Random.Range(0.8f, 1.2f);
                                 else newTree.transform.localScale = new Vector3(1, 1, 1) * Random.Range(0.4f, 0.6f);
                             }
@@ -100,16 +101,19 @@ public class MapGenerator : MonoBehaviour {
                             {
                                 int ranNum = Random.Range(0, (int)ObjectManager.RockType.None);
                                 GameObject newRock = Instantiate(Rocks[ranNum], new Vector3(x, y-0.3f, z), Quaternion.Euler(-90, Random.RandomRange(0.0f, 360.0f), 0), Map.transform);
+                                newRock.SendMessage("SetObjType", ObjectManager.Instance.objArr[x, y, z]);
                                 newRock.transform.localScale = new Vector3(1, 1, 1) * Random.Range(0.5f, 1.5f);
                             }
                             break;
                         case ObjectManager.ObjType.Water:
                             {
                                 GameObject newWater = Instantiate(Blocks[(int)ObjectManager.Instance.objArr[x, y, z]], new Vector3(x, y, z), Quaternion.identity, Map.transform);
+                                newWater.SendMessage("SetObjType", ObjectManager.Instance.objArr[x, y, z]);
                             }
                             break;
                         default:
                             GameObject newBlock = Instantiate(Blocks[(int)ObjectManager.Instance.objArr[x, y, z]], new Vector3(x, y, z), Quaternion.identity, Map.transform);
+                            newBlock.SendMessage("SetObjType", ObjectManager.Instance.objArr[x, y, z]);
                             break;
                     }
                 }

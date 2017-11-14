@@ -23,7 +23,7 @@ public class CameraControl : MonoBehaviour {
     public float CameraTrackSpd;
 
     float distanceFromTarget;
-    Vector3 direction;
+    public Vector3 direction;
 
     //for MouseDrag
     Vector3 startPt;
@@ -32,7 +32,7 @@ public class CameraControl : MonoBehaviour {
     void Start()
     {
         distanceFromTarget = transform.localPosition.magnitude;
-        direction = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(direction);
     }
 
     void Update()
@@ -55,7 +55,12 @@ public class CameraControl : MonoBehaviour {
         else if (Input.GetKey(KeyCode.Mouse2))
         {
             deltaPt = Input.mousePosition - startPt;
-            direction = direction + new Vector3(deltaPt.y, deltaPt.x, 0)* CameraRotationSpd;
+            direction += new Vector3(deltaPt.y, 0, 0)* CameraRotationSpd;
+            direction += new Vector3(0, deltaPt.x, 0) * CameraRotationSpd;
+        
+            if (direction.x > 85.0f) direction.x = 85.0f;
+            if (direction.x <-85.0f) direction.x = -85.0f;
+
             startPt = Input.mousePosition;
         }
     }

@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class WaterCube : MonoBehaviour {
+public class WaterCube :ObjectBase {
 
     public float amplitude;
 
     bool isTop;
     float offSet;
     Vector3 origin;
-
-    public MapGenerator mapgen;
-
 
     // Use this for initialization
     void Start () {
@@ -32,4 +29,6 @@ public class WaterCube : MonoBehaviour {
         offSet = Mathf.PerlinNoise((origin.x + Time.time)/5.0f, (origin.z + Time.time) / 5.0f) - 0.5f;
         transform.position = origin + Vector3.up * offSet * amplitude;
     }
+
+    
 }

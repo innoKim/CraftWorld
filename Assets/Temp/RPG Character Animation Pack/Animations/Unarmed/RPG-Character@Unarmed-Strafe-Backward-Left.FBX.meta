@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d561a28c094f3f7499e0e445eedbaae5
-timeCreated: 1494497209
+guid: 38d950ecf8ee061498d6479837d21d77
+timeCreated: 1488189159
 licenseType: Store
 ModelImporter:
   serializedVersion: 18
@@ -109,9 +109,9 @@ ModelImporter:
     100202: B_Spine2
     100204: Motion
     100206: RPG-Character-Mesh
-    100208: Exporter
-    100210: Tape001
-    100212: Tape001.Target
+    100208: Tape001
+    100210: Tape001.Target
+    100212: Exporter
     400000: B_L_Hand
     400002: B_L_Forearm
     400004: B_L_UpperArm
@@ -216,9 +216,9 @@ ModelImporter:
     400202: B_Spine2
     400204: Motion
     400206: RPG-Character-Mesh
-    400208: Exporter
-    400210: Tape001
-    400212: Tape001.Target
+    400208: Tape001
+    400210: Tape001.Target
+    400212: Exporter
     2300000: Mesh_Soldier_A
     2300002: AK47
     2300004: Chaingun
@@ -334,7 +334,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .490928262
+      - time: .446159989
         functionName: FootL
         data: 
         objectReferenceParameter: {instanceID: 0}
