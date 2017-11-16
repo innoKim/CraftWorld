@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour {
         }
         if(other.CompareTag("Item"))
         {
+            ItemManager.Instance.AddItemToInventory(other.name);
             Destroy(other.gameObject);
         }
     }

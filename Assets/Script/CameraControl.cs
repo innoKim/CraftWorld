@@ -42,7 +42,7 @@ public class CameraControl : MonoBehaviour {
         Zoom();
 
         lerpPosition = Vector3.Lerp(lerpPosition, target.position, CameraTrackSpd*0.001f);
-        lerpRotation = Vector3.Lerp(lerpRotation, direction, 0.1f);
+        lerpRotation = Vector3.Lerp(lerpRotation, direction, 0.2f);
         transform.position = lerpPosition + Quaternion.Euler(lerpRotation.x, lerpRotation.y, lerpRotation.z)*Vector3.forward * distanceFromTarget;
         transform.LookAt(lerpPosition);
     }

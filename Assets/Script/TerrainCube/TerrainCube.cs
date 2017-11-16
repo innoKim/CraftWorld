@@ -79,7 +79,6 @@ public class TerrainCube : ObjectBase, IDamageable, IDropable {
         {
             int itemNumber = Random.Range(0, dropItems.Length);
 
-            Debug.Log(dropItems[itemNumber]);
             GameObject newObject = ItemManager.Instance.GetItemFromPool(dropItems[itemNumber]);
             newObject.transform.position = transform.position;
             newObject.transform.rotation = Quaternion.identity;

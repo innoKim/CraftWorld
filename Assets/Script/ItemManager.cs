@@ -88,4 +88,19 @@ public class ItemManager : MonoBehaviour {
             return null;
         }
     }
+
+    void OnGUI()
+    {
+        string info = "";
+        
+        if(inventory != null)
+        {            
+            foreach (KeyValuePair<string, int> pair in inventory)
+            {
+                info += pair.Key + " : " + pair.Value.ToString() + "\n";
+            }            
+        }
+
+        GUI.Box(new Rect(10, 10, 100, 300), info);
+    }
 }

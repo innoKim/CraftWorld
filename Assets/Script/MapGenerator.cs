@@ -139,6 +139,9 @@ public class MapGenerator : MonoBehaviour {
             {
                 for (int y = 0; y < heightArr[x, z]; y++)
                 {
+                    if (y == 0)
+                        ObjectManager.Instance.objArr[x, y, z] = ObjectManager.ObjType.Soil2;
+                    
                     if (y == (int)heightArr[x, z])
                         ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil, ObjectManager.ObjType.Soil2, 0.9f);
                     else
@@ -217,7 +220,7 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int z = 0; z < MapDepth; z++)
             {
-                heightArr[x, z] = Mathf.PerlinNoise((float)(x + xSeed) / MapWidth * perlinScale, (float)(z + zSeed) / MapDepth * perlinScale) * heightScale;
+                heightArr[x, z] = Mathf.PerlinNoise((float)(x + xSeed) / MapWidth * perlinScale, (float)(z + zSeed) / MapDepth * perlinScale) * heightScale + 1.0f;
             }
         }
     }
@@ -240,8 +243,6 @@ public class MapGenerator : MonoBehaviour {
         }
         return false;
     }
-
-    
 
     void TreeGenerate()
     {

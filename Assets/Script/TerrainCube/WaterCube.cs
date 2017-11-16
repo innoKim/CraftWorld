@@ -28,7 +28,5 @@ public class WaterCube :ObjectBase {
 
         offSet = Mathf.PerlinNoise((origin.x + Time.time)/5.0f, (origin.z + Time.time) / 5.0f) - 0.5f;
         transform.position = origin + Vector3.up * offSet * amplitude;
-    }
-
-    
+    }   
 }
