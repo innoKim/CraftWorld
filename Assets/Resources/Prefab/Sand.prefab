@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23552232631008278}
   - component: {fileID: 65865536175983076}
   - component: {fileID: 114088913600234460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sand
   m_TagString: Terrain
   m_Icon: {fileID: 0}

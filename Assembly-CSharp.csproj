@@ -65,6 +65,8 @@
      <Compile Include="Assets\Script\TerrainCube\TerrainCube.cs" />
      <Compile Include="Assets\Script\TerrainCube\WaterCube.cs" />
      <Compile Include="Assets\Script\TerrainObject\TerrainObject.cs" />
+     <Compile Include="Assets\Script\UI\InventoryUI.cs" />
+     <Compile Include="Assets\Script\UI\ItemHolder.cs" />
      <Compile Include="Assets\Script\UI\MainUI.cs" />
      <Compile Include="Assets\Script\UI\ToggleSpriteColor.cs" />
      <None Include="Assets\Temp\Mega Fantasy Props Pack\README.txt" />

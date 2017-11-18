@@ -120,7 +120,8 @@ public class PlayerController : MonoBehaviour {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Vector3 deltaVector = new Vector3();
-        bool hitted = Physics.Raycast(ray, out hit, 100.0f);
+        LayerMask layer = 1 << LayerMask.NameToLayer("Raycast");
+        bool hitted = Physics.Raycast(ray, out hit, 100.0f, layer);
 
         if (hitted)
         {
@@ -131,7 +132,7 @@ public class PlayerController : MonoBehaviour {
         isPunching = true;
         yield return new WaitForSeconds(0.3f);
 
-        if (hitted&&deltaVector.sqrMagnitude<2.0f&&!hit.collider.CompareTag("Player"))
+        if (hitted&&deltaVector.sqrMagnitude<2.0f)
             hit.collider.gameObject.SendMessage("Damaged");
 
         yield return new WaitForSeconds(0.5f);

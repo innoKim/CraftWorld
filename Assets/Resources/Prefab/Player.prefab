@@ -2429,8 +2429,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 3
   curHp: 3
-  dropItems: []
-  dropProbability: 0
 --- !u!135 &135636478353302206
 SphereCollider:
   m_ObjectHideFlags: 1

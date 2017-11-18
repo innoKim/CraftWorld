@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23384113382136106}
   - component: {fileID: 65996453919301596}
   - component: {fileID: 114457549622671386}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Metal
   m_TagString: Terrain
   m_Icon: {fileID: 0}
