@@ -24,9 +24,16 @@ public class WaterCube :ObjectBase {
     void Update()
     {
         if (!isTop) return;
-        if (Vector3.SqrMagnitude(origin - ObjectManager.Instance.player.transform.position) > 225.0f) return;
+        if (ObjectManager.Instance.player)
+        {
+            if (Vector3.SqrMagnitude(origin - ObjectManager.Instance.player.transform.position) > 225.0f) return;
+        }
+        else
+        {
+            //if (Vector3.SqrMagnitude(origin - Camera.main.transform.position) > 225.0f) return;
+        }
 
-        offSet = Mathf.PerlinNoise((origin.x + Time.time)/5.0f, (origin.z + Time.time) / 5.0f) - 0.5f;
+        offSet = Mathf.PerlinNoise((origin.x + Time.time) / 5.0f, (origin.z + Time.time) / 5.0f) - 0.5f;
         transform.position = origin + Vector3.up * offSet * amplitude;
     }   
 }

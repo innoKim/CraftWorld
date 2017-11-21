@@ -5,41 +5,45 @@ using UnityEngine.UI;
 
 public class ItemHolder : MonoBehaviour {
 
-
     public GameObject holdItem;
-    public string itemName;
-    int count;
+    int count = 0;
 
-    // Use this for initialization
-    void Start() {
-        ItemHold();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
-    void ItemHold()
+    private void Start()
     {
-        holdItem = ItemManager.Instance.GetItemFromPool(itemName);
+    }
 
+    public void ItemHold(string itemName)
+    {
+        if (holdItem == null)
+        {
+            holdItem = ItemManager.Instance.GetItemFromPool(itemName);
 
-        if (holdItem == null) return;
-        holdItem.transform.parent = this.transform;
+            if (holdItem == null) return;
+            holdItem.transform.parent = this.transform;
 
-        RectTransform rectTransform = holdItem.AddComponent<RectTransform>();
+            RectTransform rectTransform = holdItem.AddComponent<RectTransform>();
 
-        rectTransform.localPosition = new Vector3(0, 0, -200);
-        rectTransform.localScale = new Vector3(100, 100, 100);
-        rectTransform.localRotation = Quaternion.Euler(new Vector3(-30, 30, 0));        
+            rectTransform.localPosition = new Vector3(0, 0, -100);
+            rectTransform.localScale = new Vector3(50, 50, 50);
+            rectTransform.localRotation = Quaternion.Euler(new Vector3(-30, 30, 0));
 
-        Destroy(holdItem.GetComponent<Rigidbody>());
+            Destroy(holdItem.GetComponent<Rigidbody>());
+        }
+        else if (holdItem.name == itemName)
+        {
+            count++;
+        }        
     }
        
 
     void ItemDehold()
     {
-
+        if (count > 1) count--;
+        else
+        {
+            count = 0;
+            Destroy(holdItem);
+            holdItem = null;
+        }
     }
 }

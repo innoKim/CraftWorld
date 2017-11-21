@@ -40,7 +40,13 @@ public class MapGenerator : MonoBehaviour {
     {
         MapGenerate();
     }
-       
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+            MapGenerate();
+    }
+
     private void OnDestroy()
     {
         StaticOcclusionCulling.Clear();
@@ -50,6 +56,8 @@ public class MapGenerator : MonoBehaviour {
 
     void MapGenerate()
     {
+        if (Map != null) Destroy(Map);
+
         Map = new GameObject("Map");
         Map.isStatic = true;
 
@@ -220,7 +228,7 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int z = 0; z < MapDepth; z++)
             {
-                heightArr[x, z] = Mathf.PerlinNoise((float)(x + xSeed) / MapWidth * perlinScale, (float)(z + zSeed) / MapDepth * perlinScale) * heightScale + 1.0f;
+                heightArr[x, z] = Mathf.PerlinNoise((float)(x + xSeed) / perlinScale, (float)(z + zSeed) / perlinScale) * heightScale + 1.0f;
             }
         }
     }

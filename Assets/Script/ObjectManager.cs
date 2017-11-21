@@ -9,7 +9,6 @@ public class ObjectManager : MonoBehaviour {
         Soil,
         Sand,
         Gravel,
-        Stone,
         Metal,
         Water,
         Soil2,
