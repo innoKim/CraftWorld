@@ -25,6 +25,8 @@ public class TerrainObject : ObjectBase, IDamageable, IDropable {
     public virtual void Destroyed()
     {
         Destroy(this.gameObject);
+        Vector3 pos = transform.position;
+        ObjectManager.Instance.objArr[Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z)] = ObjectManager.ObjType.None;
     }
 
     public virtual IEnumerator Vibrate(float[] vibrateParams)

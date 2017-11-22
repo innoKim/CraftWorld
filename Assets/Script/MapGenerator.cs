@@ -29,8 +29,6 @@ public class MapGenerator : MonoBehaviour {
     public int xSeed;
     public int zSeed;
 
-    private float[,] heightArr;
-
     private GameObject Map;
 
     public bool OcclusCulling;
@@ -60,7 +58,10 @@ public class MapGenerator : MonoBehaviour {
 
         Map = new GameObject("Map");
         Map.isStatic = true;
-
+        ObjectManager.Instance.waterHeight = WaterLevelHeight;
+        ObjectManager.Instance.mapWidth = MapWidth;
+        ObjectManager.Instance.mapDepth = MapDepth;
+        ObjectManager.Instance.mapHeight = MapHeight;
         NoiseGenerate();
 
         ObjMapGenerate();
@@ -91,7 +92,6 @@ public class MapGenerator : MonoBehaviour {
         GravelGenerate();
         TreeGenerate();
         RockGenerate();
-        //MetalGenerate();
     }
 
     void BlockGenerate()
@@ -145,12 +145,12 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int z = 0; z < MapWidth; z++)
             {
-                for (int y = 0; y < heightArr[x, z]; y++)
+                for (int y = 0; y < ObjectManager.Instance.heightArr[x, z]; y++)
                 {
                     if (y == 0)
                         ObjectManager.Instance.objArr[x, y, z] = ObjectManager.ObjType.Soil2;
                     
-                    if (y == (int)heightArr[x, z])
+                    if (y == (int)ObjectManager.Instance.heightArr[x, z])
                         ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil, ObjectManager.ObjType.Soil2, 0.9f);
                     else
                         ObjectManager.Instance.objArr[x, y, z] = BlendGenerate(ObjectManager.ObjType.Soil2, ObjectManager.ObjType.Metal, 0.8f);
@@ -196,7 +196,7 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int z = 0; z < MapWidth; z++)
             {
-                for (int y = (int)heightArr[x, z] + 1; y < WaterLevelHeight; y++)
+                for (int y = (int)ObjectManager.Instance.heightArr[x, z] + 1; y < WaterLevelHeight; y++)
                 {
                     if (ObjectManager.Instance.objArr[x, y, z] == ObjectManager.ObjType.None)
                         ObjectManager.Instance.objArr[x, y, z] = ObjectManager.ObjType.Water;
@@ -222,13 +222,13 @@ public class MapGenerator : MonoBehaviour {
 
     void NoiseGenerate()
     {
-        heightArr = new float[MapWidth, MapDepth];
+        ObjectManager.Instance.heightArr = new float[MapWidth, MapDepth];
 
         for (int x = 0; x < MapWidth; x++)
         {
             for (int z = 0; z < MapDepth; z++)
             {
-                heightArr[x, z] = Mathf.PerlinNoise((float)(x + xSeed) / perlinScale, (float)(z + zSeed) / perlinScale) * heightScale + 1.0f;
+                ObjectManager.Instance.heightArr[x, z] = Mathf.PerlinNoise((float)(x + xSeed) / perlinScale, (float)(z + zSeed) / perlinScale) * heightScale + 1.0f;
             }
         }
     }
@@ -258,11 +258,11 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int j = 0; j < MapDepth; j++)
             {
-                if (heightArr[i, j] < WaterLevelHeight) continue;
+                if (ObjectManager.Instance.heightArr[i, j] < WaterLevelHeight) continue;
 
-                if(ObjectManager.Instance.objArr[i,(int)heightArr[i,j],j] == ObjectManager.ObjType.Soil)
+                if(ObjectManager.Instance.objArr[i,(int)ObjectManager.Instance.heightArr[i,j],j] == ObjectManager.ObjType.Soil)
                 {
-                    ObjectManager.Instance.objArr[i, (int)heightArr[i, j] + 1, j] = BlendGenerate(ObjectManager.ObjType.Tree, ObjectManager.ObjType.None, treeRatio);
+                    ObjectManager.Instance.objArr[i, (int)ObjectManager.Instance.heightArr[i, j] + 1, j] = BlendGenerate(ObjectManager.ObjType.Tree, ObjectManager.ObjType.None, treeRatio);
                 }
             }
         }
@@ -274,10 +274,10 @@ public class MapGenerator : MonoBehaviour {
         {
             for (int j = 0; j < MapDepth; j++)
             {
-                if (heightArr[i, j] < WaterLevelHeight) continue;
+                if (ObjectManager.Instance.heightArr[i, j] < WaterLevelHeight) continue;
 
-                if(ObjectManager.Instance.objArr[i, (int)heightArr[i, j] + 1, j] == ObjectManager.ObjType.None)
-                    ObjectManager.Instance.objArr[i, (int)heightArr[i, j] + 1, j] = BlendGenerate(ObjectManager.ObjType.Rock, ObjectManager.ObjType.None, RockRatio);
+                if(ObjectManager.Instance.objArr[i, (int)ObjectManager.Instance.heightArr[i, j] + 1, j] == ObjectManager.ObjType.None)
+                    ObjectManager.Instance.objArr[i, (int)ObjectManager.Instance.heightArr[i, j] + 1, j] = BlendGenerate(ObjectManager.ObjType.Rock, ObjectManager.ObjType.None, RockRatio);
             }
         }
     }

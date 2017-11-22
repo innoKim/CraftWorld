@@ -34,6 +34,11 @@ public class ObjectManager : MonoBehaviour {
 
     public ObjType[,,] objArr = null;
     public GameObject player = null;
+    public float[,] heightArr = null;
+    public float waterHeight;
+    public int mapWidth;
+    public int mapDepth;
+    public int mapHeight;
 
     static ObjectManager instance = null;
     
@@ -61,5 +66,14 @@ public class ObjectManager : MonoBehaviour {
     public void InitObjArr(int x, int y, int z)
     {
         objArr = new ObjType[x, y, z];
+    }
+
+    public int Height(int x,int z)
+    {
+        for(int y=0;y<mapHeight;y++)
+        {
+            if (objArr[x, y, z] == ObjType.None || objArr[x, y, z] == ObjType.Water) return y;
+        }
+        return mapHeight;
     }
 }
