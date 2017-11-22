@@ -17,8 +17,9 @@ public class TerrainObject : ObjectBase, IDamageable, IDropable {
 
         if (curHp <= 0)
         {
-            Destroy(this.gameObject);
+            Destroyed();
             Drop(dropProbability);
+            Destroy(this.gameObject);
         }
     }
 
@@ -26,7 +27,9 @@ public class TerrainObject : ObjectBase, IDamageable, IDropable {
     {
         Destroy(this.gameObject);
         Vector3 pos = transform.position;
-        ObjectManager.Instance.objArr[Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z)] = ObjectManager.ObjType.None;
+        Debug.Log(Mathf.RoundToInt(pos.x).ToString()+ Mathf.CeilToInt(pos.y).ToString() + Mathf.RoundToInt(pos.z).ToString());
+        Debug.Log((int)ObjectManager.Instance.objArr[Mathf.RoundToInt(pos.x), Mathf.CeilToInt(pos.y), Mathf.RoundToInt(pos.z)]);
+        ObjectManager.Instance.objArr[Mathf.RoundToInt(pos.x), Mathf.CeilToInt(pos.y), Mathf.RoundToInt(pos.z)] = ObjectManager.ObjType.None;
     }
 
     public virtual IEnumerator Vibrate(float[] vibrateParams)

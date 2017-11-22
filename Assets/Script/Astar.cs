@@ -64,8 +64,20 @@ public class AstarGrid
                     int _i = x + i,_j = z+j;
                     if (_i < 0 || _i >= width) continue;
                     if (_j < 0 || _j>= depth) continue;
+
+                    //물속의 지형이거나
                     if (nodes[_i, _j].Height < ObjectManager.Instance.waterHeight) continue;
-                    if (ObjectManager.Instance.objArr[_i, (int)nodes[_i, _j].Height + 1, _j] != ObjectManager.ObjType.None) continue;
+                    //지형위에 오브젝트가 있거나
+                    if (ObjectManager.Instance.objArr[_i, (int)nodes[_i, _j].Height, _j] != ObjectManager.ObjType.None) continue;
+                    //대각이동시 걸리는 곳이 있거나
+                    if(Mathf.Abs(i)+ Mathf.Abs(j)==2)
+                    {
+                        if (x < 0 || x >= width) continue;
+                        if (ObjectManager.Instance.objArr[x, (int)nodes[x, _j].Height, _j] != ObjectManager.ObjType.None) continue;
+
+                        if (z < 0 || z >= depth) continue;
+                        if (ObjectManager.Instance.objArr[_i, (int)nodes[_i, z].Height, z] != ObjectManager.ObjType.None) continue;
+                    }
 
                     neighbours.Add(nodes[_i, _j]);
                 }

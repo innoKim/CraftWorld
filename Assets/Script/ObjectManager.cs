@@ -68,11 +68,14 @@ public class ObjectManager : MonoBehaviour {
         objArr = new ObjType[x, y, z];
     }
 
-    public int Height(int x,int z)
+    public int Height(int x, int z)
     {
-        for(int y=0;y<mapHeight;y++)
+        for (int y = 0; y < mapHeight; y++)
         {
-            if (objArr[x, y, z] == ObjType.None || objArr[x, y, z] == ObjType.Water) return y;
+            if (objArr[x, y, z] == ObjType.None 
+                || objArr[x, y, z] == ObjType.Water 
+                || objArr[x, y, z] == ObjType.Tree
+                || objArr[x, y, z] == ObjType.Rock) return y;
         }
         return mapHeight;
     }

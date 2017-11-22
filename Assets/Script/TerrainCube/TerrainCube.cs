@@ -30,8 +30,9 @@ public class TerrainCube : ObjectBase, IDamageable, IDropable {
 
         if (curHp <= 0)
         {
-            Destroy(this.gameObject);
+            Destroyed();                     
             Drop(dropProbability);
+            Destroy(this.gameObject);
         }
     }
 
