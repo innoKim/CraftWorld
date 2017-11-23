@@ -83,7 +83,6 @@ public class AstarGrid
                 }
             }
         }
-        Debug.Log("neighbourCount : " + neighbours.Count.ToString());
         return neighbours;
     }
 
@@ -139,6 +138,11 @@ public class Astar : MonoBehaviour {
         }
     }
     
+    public List<Node> pathFind(Transform start, Transform dest)
+    {
+        return pathFind(Mathf.RoundToInt(start.position.x), Mathf.RoundToInt(start.position.z), Mathf.RoundToInt(dest.position.x), Mathf.RoundToInt(dest.position.z));
+    }
+
     public List<Node> pathFind(int startX, int startZ, int destX, int destZ)
     {
         int n = 0;
@@ -171,7 +175,6 @@ public class Astar : MonoBehaviour {
 
             if (currentNode == targetNode)
             {
-                Debug.Log("RetracePath start");
                 return RetracePath(startNode, targetNode);
             }
 
@@ -194,9 +197,7 @@ public class Astar : MonoBehaviour {
                 }
             }
         }
-        Debug.Log("SomeThingWrong" + n++.ToString());
         return null;
-        
     }
 
     List<Node> RetracePath(Node startNode, Node targetNode)
@@ -212,8 +213,6 @@ public class Astar : MonoBehaviour {
         }
 
         temp.Reverse();
-
-        Debug.Log("PathSize :" + temp.Count.ToString());
 
         return temp; 
     }

@@ -51,8 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AstarTest.cs" />
-     <Compile Include="Assets\Script\Astar.cs" />
+     <Compile Include="Assets\Script\Astar\Astar.cs" />
+     <Compile Include="Assets\Script\Astar\AstarTracer.cs" />
      <Compile Include="Assets\Script\CameraControl.cs" />
      <Compile Include="Assets\Script\Interface\IDamageable.cs" />
      <Compile Include="Assets\Script\Interface\IDropable.cs" />

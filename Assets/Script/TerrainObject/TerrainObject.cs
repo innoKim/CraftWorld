@@ -27,8 +27,6 @@ public class TerrainObject : ObjectBase, IDamageable, IDropable {
     {
         Destroy(this.gameObject);
         Vector3 pos = transform.position;
-        Debug.Log(Mathf.RoundToInt(pos.x).ToString()+ Mathf.CeilToInt(pos.y).ToString() + Mathf.RoundToInt(pos.z).ToString());
-        Debug.Log((int)ObjectManager.Instance.objArr[Mathf.RoundToInt(pos.x), Mathf.CeilToInt(pos.y), Mathf.RoundToInt(pos.z)]);
         ObjectManager.Instance.objArr[Mathf.RoundToInt(pos.x), Mathf.CeilToInt(pos.y), Mathf.RoundToInt(pos.z)] = ObjectManager.ObjType.None;
     }
 
