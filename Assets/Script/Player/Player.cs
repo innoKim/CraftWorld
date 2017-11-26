@@ -7,6 +7,14 @@ public class Player : ObjectBase, IDamageable {
     public int maxHp;
     public int curHp;
 
+    public Weapon weapon;
+    public Armor armor;
+
+    public Transform rightHandTransform;
+    public Transform leftHandTransform;
+
+    public Vector3 rotation;
+
     public int MaxHp
     {
         get { return maxHp; }
@@ -19,9 +27,9 @@ public class Player : ObjectBase, IDamageable {
         set { curHp = value; }
     }
 
-    public virtual void Damaged()
+    public virtual void Damaged(int damage)
     {
-        curHp--;
+        curHp-= damage;
 
         //temp[0] : 진동 사이즈, temp[1] : 진동 시간
         float[] temp = new float[2] { 0.05f, 0.2f };
@@ -53,5 +61,34 @@ public class Player : ObjectBase, IDamageable {
         }
 
         transform.position = origin;
+    }
+
+    public void Equip(EquipItem item)
+    {
+        if(item.equipType == EquipItem.EquipType.Weapon)
+        {
+            weapon = item as Weapon;
+        }
+        else if(item.equipType == EquipItem.EquipType.Armor)
+        {
+            armor = item as Armor;
+        }
+    }
+    
+    void Update()
+    {
+        if (weapon)
+        {
+            if(weapon.weaponType == Weapon.WeaponType.Sword)
+            {
+                weapon.transform.position = rightHandTransform.position;
+                weapon.transform.rotation = rightHandTransform.rotation * Quaternion.Euler(new Vector3(90, 0, 50));
+            }
+            else if(weapon.weaponType == Weapon.WeaponType.Bow)
+            {
+                weapon.transform.position = leftHandTransform.position;
+                weapon.transform.rotation = leftHandTransform.rotation * Quaternion.Euler(new Vector3(0, 0, -90));
+            }            
+        }
     }
 }

@@ -7,6 +7,6 @@ public interface IDamageable{
     int MaxHp { get; set; }
     int CurHp { get; set; }
     
-    void Damaged();
+    void Damaged(int damage);
     void Destroyed();
 }

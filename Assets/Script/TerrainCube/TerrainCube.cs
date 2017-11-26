@@ -20,9 +20,9 @@ public class TerrainCube : ObjectBase, IDamageable, IDropable {
         set { curHp = value; }
     }
 
-    public virtual void Damaged()
+    public virtual void Damaged(int damage)
     {
-        curHp--;
+        curHp-= damage;
 
         //temp[0] : 진동 사이즈, temp[1] : 진동 시간
         float[] temp = new float[2] { 0.05f, 0.2f };

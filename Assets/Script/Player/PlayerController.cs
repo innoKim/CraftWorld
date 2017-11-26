@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("isPunching");
-            if (!isPunching) StartCoroutine("Punch");
+            if (!isPunching) StartCoroutine("Attack");
         }
     }
 
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private IEnumerator Punch()
+    private IEnumerator Attack()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
 
         if (hitted&&deltaVector.sqrMagnitude<2.0f)
-            hit.collider.gameObject.SendMessage("Damaged");
+            hit.collider.gameObject.SendMessage("Damaged",GetComponent<Player>().weapon.Damage+1);
 
         yield return new WaitForSeconds(0.5f);
         isPunching = false;

@@ -19,31 +19,8 @@ public class InventoryUI : MonoBehaviour {
         {
             GameObject newHolder = Instantiate(itemHolder, this.transform);
             newHolder.name = "ItemHolder" + i.ToString();
+            newHolder.GetComponent<ItemHolder>().inventoryIndex = i;
             holders.Add(newHolder);
-        }
-
-        for(int i=0;i<8;i++)
-        {
-            string itemName;
-            switch(Random.Range(0, 3))
-            {
-                case 0:
-                    itemName = "Log";
-                    break;
-
-                case 1:
-                    itemName = "Stone";
-                    break;
-
-                case 2:
-                    itemName = "Soil";
-                    break;
-
-                default:
-                    itemName = "";
-                    break;
-            }
-            holders[i].GetComponent<ItemHolder>().ItemHold(itemName);
         }
     }
 }

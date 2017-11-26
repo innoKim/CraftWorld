@@ -157,7 +157,7 @@ public class Astar : MonoBehaviour {
         
         while (openSet.Count > 0)
         {
-
+            n++;
             Node currentNode = openSet[0];
             for (int i = 1; i < openSet.Count; i++)
             {
@@ -197,6 +197,7 @@ public class Astar : MonoBehaviour {
                 }
             }
         }
+        Debug.Log(n);
         return null;
     }
 

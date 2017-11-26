@@ -27,6 +27,7 @@ public class ItemManager : MonoBehaviour {
     {
         DontDestroyOnLoad(this.gameObject);
         AddPrefabToItemPool("Prefab/Item");
+        inventory = new List<string>();
     }
     
     void AddPrefabToItemPool(string path)
@@ -41,40 +42,32 @@ public class ItemManager : MonoBehaviour {
         }
     }
 
-    private Dictionary<string, int> inventory = null;
-    public Dictionary<string ,GameObject> itemPool = null;
-    
+    public List<string> inventory = null;
+    public Dictionary<string, GameObject> itemPool = null;
+
     public void AddItemToInventory(string itemName)
     {
-        if (inventory == null) inventory = new Dictionary<string, int>();
-
-        if(inventory.ContainsKey(itemName))
-        {
-            inventory[itemName]++;
-        }
-        else
-        {
-            inventory.Add(itemName, 1);
-        }
+        if (inventory.Count < 15)
+            inventory.Add(itemName);
+        else Debug.Log("Inventory is full");
+        return;
     }
 
     public GameObject GetItemFromInven(string itemName)
     {
-        if (inventory.ContainsKey(itemName))
+        if(inventory.Remove(itemName))
         {
-            inventory[itemName]--;
-            if (inventory[itemName] <= 0) inventory.Remove(itemName);
-            
             GameObject newObj = Instantiate(itemPool[itemName]);
             newObj.name = itemName;
             return newObj;
         }
         else
         {
+            Debug.Log("there is no item has such name");
             return null;
-        }        
+        }
     }
-
+    
     public GameObject GetItemFromPool(string itemName)
     {
         if (itemPool.ContainsKey(itemName))
@@ -95,12 +88,60 @@ public class ItemManager : MonoBehaviour {
         
         if(inventory != null)
         {            
-            foreach (KeyValuePair<string, int> pair in inventory)
+            foreach (string itemName in inventory)
             {
-                info += pair.Key + " : " + pair.Value.ToString() + "\n";
+                info += itemName + "\n";
             }            
         }
 
         GUI.Box(new Rect(10, 10, 100, 300), info);
     }
 }
+
+//private Dictionary<string, int> inventory = null;
+//public Dictionary<string ,GameObject> itemPool = null;
+
+//public void AddItemToInventory(string itemName)
+//{
+//    if (inventory == null) inventory = new Dictionary<string, int>();
+
+//    if(inventory.ContainsKey(itemName))
+//    {
+//        inventory[itemName]++;
+//    }
+//    else
+//    {
+//        inventory.Add(itemName, 1);
+//    }
+//}
+
+//public GameObject GetItemFromInven(string itemName)
+//{
+//    if (inventory.ContainsKey(itemName))
+//    {
+//        inventory[itemName]--;
+//        if (inventory[itemName] <= 0) inventory.Remove(itemName);
+
+//        GameObject newObj = Instantiate(itemPool[itemName]);
+//        newObj.name = itemName;
+//        return newObj;
+//    }
+//    else
+//    {
+//        return null;
+//    }        
+//}
+
+//public GameObject GetItemFromPool(string itemName)
+//{
+//    if (itemPool.ContainsKey(itemName))
+//    {
+//        GameObject newObj = Instantiate(itemPool[itemName]);
+//        newObj.name = itemName;
+//        return newObj;
+//    }
+//    else
+//    {
+//        return null;
+//    }
+//}
