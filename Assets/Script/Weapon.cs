@@ -14,5 +14,5 @@ public class Weapon : EquipItem
     public WeaponType weaponType;
     public int Damage;
     public GameObject bullet;
-    public float eminPower;
+    public float emitPower;
 }

@@ -19,7 +19,6 @@ public class Player : ObjectBase, IDamageable {
     void Start()
     {
         anim = GetComponent<Animator>();
-        anim.SetInteger("nWeapon", ((int)weapon.weaponType));
     }
 
     public int MaxHp
@@ -110,7 +109,7 @@ public class Player : ObjectBase, IDamageable {
                 GameObject newBullet = Instantiate(weapon.bullet) as GameObject;
                 newBullet.transform.position = weapon.transform.position;
                 newBullet.transform.rotation = transform.rotation;
-                newBullet.GetComponent<Rigidbody>().AddForce((transform.forward + 0.1f * transform.up) * weapon.eminPower);
+                newBullet.GetComponent<Rigidbody>().AddForce((transform.forward + 0.1f * transform.up) * weapon.emitPower);
             }
         }
     }
