@@ -51,9 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\Armor.cs" />
+     <Compile Include="Assets\Script\Arrow.cs" />
      <Compile Include="Assets\Script\Astar\Astar.cs" />
      <Compile Include="Assets\Script\Astar\AstarTracer.cs" />
      <Compile Include="Assets\Script\CameraControl.cs" />
+     <Compile Include="Assets\Script\EquipItem.cs" />
      <Compile Include="Assets\Script\Interface\IDamageable.cs" />
      <Compile Include="Assets\Script\Interface\IDropable.cs" />
      <Compile Include="Assets\Script\ItemManager.cs" />
@@ -71,6 +74,7 @@
      <Compile Include="Assets\Script\UI\ItemHolder.cs" />
      <Compile Include="Assets\Script\UI\MainUI.cs" />
      <Compile Include="Assets\Script\UI\ToggleSpriteColor.cs" />
+     <Compile Include="Assets\Script\Weapon.cs" />
      <None Include="Assets\Temp\Mega Fantasy Props Pack\README.txt" />
      <None Include="Assets\Horse\SoftAlpha.shader" />
  <Reference Include="UnityEngine.UI">

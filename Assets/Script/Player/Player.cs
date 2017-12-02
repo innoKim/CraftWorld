@@ -14,6 +14,13 @@ public class Player : ObjectBase, IDamageable {
     public Transform leftHandTransform;
 
     public Vector3 rotation;
+    public Animator anim;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+        anim.SetInteger("nWeapon", ((int)weapon.weaponType));
+    }
 
     public int MaxHp
     {
@@ -68,11 +75,12 @@ public class Player : ObjectBase, IDamageable {
         if(item.equipType == EquipItem.EquipType.Weapon)
         {
             weapon = item as Weapon;
+            if (item != null) GetComponent<Animator>().SetInteger("nWeapon", ((int)weapon.weaponType));
         }
         else if(item.equipType == EquipItem.EquipType.Armor)
         {
             armor = item as Armor;
-        }
+        }        
     }
     
     void Update()
@@ -88,7 +96,22 @@ public class Player : ObjectBase, IDamageable {
             {
                 weapon.transform.position = leftHandTransform.position;
                 weapon.transform.rotation = leftHandTransform.rotation * Quaternion.Euler(new Vector3(0, 0, -90));
-            }            
+            }
+        }
+    }
+    
+
+    public void WeaponFire()
+    {
+        if (weapon)
+        {
+            if (weapon.weaponType == Weapon.WeaponType.Bow)
+            {
+                GameObject newBullet = Instantiate(weapon.bullet) as GameObject;
+                newBullet.transform.position = weapon.transform.position;
+                newBullet.transform.rotation = transform.rotation;
+                newBullet.GetComponent<Rigidbody>().AddForce((transform.forward + 0.1f * transform.up) * weapon.eminPower);
+            }
         }
     }
 }

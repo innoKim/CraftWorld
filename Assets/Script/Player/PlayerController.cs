@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 
     public float RotSpd;
     public float JumpPower;
+    public float ChargePower;
 
     private Rigidbody rb;
     private Animator anim;
@@ -21,24 +22,62 @@ public class PlayerController : MonoBehaviour {
 
     private AttackColider ac;
     private Camera cam;
+    private Player player;
+
+    //for attack
+    Ray ray;
+    RaycastHit hit;
+    Vector3 deltaVector;
+    LayerMask layer;
+    bool hitted;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        
         ac = GetComponentInChildren<AttackColider>();
         cam = Camera.main.GetComponent<Camera>();
+        player = GetComponent<Player>();
 
+        //for lookdir
         ObjectManager.Instance.player = this.gameObject;
         lerpDir = Quaternion.Euler(new Vector3(0, cam.transform.rotation.eulerAngles.y, 0)) * Vector3.forward;
+
+        //for peek collider
+        layer = 1 << LayerMask.NameToLayer("Raycast");
+
     }
 
     void Update() {
         Move();
         Jump();
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+
+        if(player.weapon)
+        {
+            Attack();
+        }
+    }
+    
+    void Attack()
+    {
+        if (player.weapon.weaponType != Weapon.WeaponType.Bow || Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("isPunching");
-            if (!isPunching) StartCoroutine("Attack");
+            if (!isPunching) StartCoroutine("MeleeAttack");
+        }
+
+        if (player.weapon.weaponType == Weapon.WeaponType.Bow)
+        {
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                anim.SetTrigger("isPunching");
+                if (!isPunching) StartCoroutine("Attack");
+            }
+            else if (Input.GetKey(KeyCode.Mouse0))
+            {
+                player.weapon.eminPower += ChargePower * Time.deltaTime;
+
+            }
         }
     }
 
@@ -115,13 +154,44 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private IEnumerator Attack()
+    private IEnumerator ChargeAttack()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Vector3 deltaVector = new Vector3();
-        LayerMask layer = 1 << LayerMask.NameToLayer("Raycast");
-        bool hitted = Physics.Raycast(ray, out hit, 100.0f, layer);
+        while(true)
+        {
+            ray = cam.ScreenPointToRay(Input.mousePosition);
+            hitted = Physics.Raycast(ray, out hit, 100.0f, layer);
+
+            if (hitted)
+            {
+                deltaVector = hit.point - (transform.position + Vector3.up * 0.5f);
+                moveDir = new Vector3(deltaVector.x, 0, deltaVector.z).normalized;
+            }
+
+            if(player.weapon.eminPower<1000)
+            player.weapon.eminPower += ChargePower * Time.deltaTime;
+
+            if (Input.GetKeyUp(KeyCode.Mouse0)) break;
+
+            yield return null;
+        }
+
+        isPunching = true;
+        yield return new WaitForSeconds(0.3f);
+
+        player.WeaponFire();
+        player.weapon.eminPower = 0.0f;
+
+        if (hitted && deltaVector.sqrMagnitude < 2.0f)
+            hit.collider.gameObject.SendMessage("Damaged", GetComponent<Player>().weapon.Damage + 1);
+
+        yield return new WaitForSeconds(0.5f);
+        isPunching = false;
+    }
+
+    private IEnumerator MeleeAttack()
+    {
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+        hitted = Physics.Raycast(ray, out hit, 100.0f, layer);
 
         if (hitted)
         {
@@ -131,6 +201,8 @@ public class PlayerController : MonoBehaviour {
 
         isPunching = true;
         yield return new WaitForSeconds(0.3f);
+
+        player.WeaponFire();
 
         if (hitted&&deltaVector.sqrMagnitude<2.0f)
             hit.collider.gameObject.SendMessage("Damaged",GetComponent<Player>().weapon.Damage+1);

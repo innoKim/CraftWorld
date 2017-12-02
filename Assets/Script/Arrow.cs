@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipItem : MonoBehaviour {
+public class Arrow : MonoBehaviour {
 
-    public enum EquipType
-    {
-        None,
-        Weapon,
-        Armor
-    }
-
-    public EquipType equipType;
+    Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {

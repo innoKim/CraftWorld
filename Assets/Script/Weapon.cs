@@ -6,11 +6,13 @@ public class Weapon : EquipItem
 {
     public enum WeaponType
     {
+        None,
         Sword,
-        Bow,
-        None
+        Bow       
     }
 
     public WeaponType weaponType;
     public int Damage;
+    public GameObject bullet;
+    public float eminPower;
 }
