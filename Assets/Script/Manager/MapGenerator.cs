@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 
 public class MapGenerator : MonoBehaviour {
 
@@ -31,8 +31,8 @@ public class MapGenerator : MonoBehaviour {
 
     private GameObject Map;
 
-    public bool OcclusCulling;
-    public bool LightMapping;
+//    public bool OcclusCulling;
+//    public bool LightMapping;
 
     void Start()
     {
@@ -47,9 +47,9 @@ public class MapGenerator : MonoBehaviour {
 
     private void OnDestroy()
     {
-        StaticOcclusionCulling.Clear();
-        Lightmapping.ClearDiskCache();
-        Lightmapping.ClearLightingDataAsset();
+//        StaticOcclusionCulling.Clear();
+//        Lightmapping.ClearDiskCache();
+//        Lightmapping.ClearLightingDataAsset();
     }
 
     void MapGenerate()
@@ -68,8 +68,8 @@ public class MapGenerator : MonoBehaviour {
 
         BlockGenerate();
 
-        if(LightMapping) LightmapBake();
-        if(OcclusCulling) OcclusionBake();        
+ //       if(LightMapping) LightmapBake();
+ //       if(OcclusCulling) OcclusionBake();        
     }
 
     void ObjMapGenerate()
@@ -291,16 +291,16 @@ public class MapGenerator : MonoBehaviour {
         else return B;
     }
 
-    void OcclusionBake()
-    {
-        StaticOcclusionCulling.Compute();
-    }
-
-    void LightmapBake()
-    {
-        Lightmapping.Clear();
-        Lightmapping.bakedGI = true;
-        Lightmapping.realtimeGI = true;
-        Lightmapping.Bake();
-    }
+//    void OcclusionBake()
+//    {
+//        StaticOcclusionCulling.Compute();
+//    }
+//
+//    void LightmapBake()
+//    {
+//        Lightmapping.Clear();
+//        Lightmapping.bakedGI = true;
+//        Lightmapping.realtimeGI = true;
+//        Lightmapping.Bake();
+//    }
 }

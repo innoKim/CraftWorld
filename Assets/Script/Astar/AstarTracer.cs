@@ -77,6 +77,7 @@ public class AstarTracer : MonoBehaviour {
         if ((afterNodePos-transform.position).sqrMagnitude>0.1f)
         {
             targetDir = (afterNodePos - transform.position).normalized;
+            transform.LookAt(transform.position + targetDir);
 
             //높이가 한칸차이나면 점프 그 이상은 이동 종료
             if(!isJumping&&afterNodePos.y > transform.position.y + 0.1f)
