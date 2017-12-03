@@ -15,4 +15,5 @@ public class Weapon : EquipItem
     public int Damage;
     public GameObject bullet;
     public float emitPower;
+    public float maxPower;
 }

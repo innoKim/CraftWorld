@@ -28,6 +28,9 @@ public class ItemManager : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         AddPrefabToItemPool("Prefab/Item");
         inventory = new List<string>();
+
+        AddItemToInventory("Bow");
+        AddItemToInventory("Sword");
     }
     
     void AddPrefabToItemPool(string path)
@@ -97,51 +100,3 @@ public class ItemManager : MonoBehaviour {
         GUI.Box(new Rect(10, 10, 100, 300), info);
     }
 }
-
-//private Dictionary<string, int> inventory = null;
-//public Dictionary<string ,GameObject> itemPool = null;
-
-//public void AddItemToInventory(string itemName)
-//{
-//    if (inventory == null) inventory = new Dictionary<string, int>();
-
-//    if(inventory.ContainsKey(itemName))
-//    {
-//        inventory[itemName]++;
-//    }
-//    else
-//    {
-//        inventory.Add(itemName, 1);
-//    }
-//}
-
-//public GameObject GetItemFromInven(string itemName)
-//{
-//    if (inventory.ContainsKey(itemName))
-//    {
-//        inventory[itemName]--;
-//        if (inventory[itemName] <= 0) inventory.Remove(itemName);
-
-//        GameObject newObj = Instantiate(itemPool[itemName]);
-//        newObj.name = itemName;
-//        return newObj;
-//    }
-//    else
-//    {
-//        return null;
-//    }        
-//}
-
-//public GameObject GetItemFromPool(string itemName)
-//{
-//    if (itemPool.ContainsKey(itemName))
-//    {
-//        GameObject newObj = Instantiate(itemPool[itemName]);
-//        newObj.name = itemName;
-//        return newObj;
-//    }
-//    else
-//    {
-//        return null;
-//    }
-//}

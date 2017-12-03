@@ -57,11 +57,12 @@ public class PlayerController : MonoBehaviour {
         {
             Attack();
         }
-    }
-    
-    void Attack()
-    {        
 
+        if (Input.GetKeyDown(KeyCode.Mouse0)) anim.SetInteger("nWeapon", (int)player.weapon.weaponType);
+    }
+
+    void Attack()
+    {
         if (player.weapon.weaponType != Weapon.WeaponType.Bow && Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("isPunching");
@@ -82,7 +83,6 @@ public class PlayerController : MonoBehaviour {
             {
                 if (timer < 0.3f) timer += Time.deltaTime;
                 else anim.speed = 0.0f;
-                player.weapon.emitPower += ChargePower * Time.deltaTime;
             }
         }
     }
@@ -179,8 +179,7 @@ public class PlayerController : MonoBehaviour {
                 moveDir = new Vector3(deltaVector.x, 0, deltaVector.z).normalized;
             }
 
-            if(player.weapon.emitPower<1000)
-            player.weapon.emitPower += ChargePower * Time.deltaTime;
+            if(player.weapon.emitPower < player.weapon.maxPower) player.weapon.emitPower += ChargePower * Time.deltaTime;
 
             if (Input.GetKeyUp(KeyCode.Mouse0)) break;
 
@@ -189,11 +188,8 @@ public class PlayerController : MonoBehaviour {
                 
         yield return new WaitForSeconds(0.3f);
 
-        player.WeaponFire();
-
-        if (hitted && deltaVector.sqrMagnitude < 2.0f)
-            hit.collider.gameObject.SendMessage("Damaged", GetComponent<Player>().weapon.Damage + 1);
-
+        player.WeaponFire(deltaVector.normalized);
+        
         yield return new WaitForSeconds(0.5f);
         isPunching = false;
     }
@@ -211,8 +207,6 @@ public class PlayerController : MonoBehaviour {
 
         isPunching = true;
         yield return new WaitForSeconds(0.3f);
-
-        player.WeaponFire();
 
         if (hitted&&deltaVector.sqrMagnitude<2.0f)
             hit.collider.gameObject.SendMessage("Damaged",GetComponent<Player>().weapon.Damage+1);

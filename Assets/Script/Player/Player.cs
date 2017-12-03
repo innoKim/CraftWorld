@@ -100,7 +100,7 @@ public class Player : ObjectBase, IDamageable {
     }
     
 
-    public void WeaponFire()
+    public void WeaponFire(Vector3 eminDir)
     {
         if (weapon)
         {
@@ -109,7 +109,7 @@ public class Player : ObjectBase, IDamageable {
                 GameObject newBullet = Instantiate(weapon.bullet) as GameObject;
                 newBullet.transform.position = weapon.transform.position;
                 newBullet.transform.rotation = transform.rotation;
-                newBullet.GetComponent<Rigidbody>().AddForce((transform.forward + 0.1f * transform.up) * weapon.emitPower);
+                newBullet.GetComponent<Rigidbody>().AddForce((eminDir + 0.1f * transform.up) * weapon.emitPower);
             }
         }
     }

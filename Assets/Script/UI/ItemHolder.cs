@@ -45,8 +45,19 @@ public class ItemHolder : MonoBehaviour {
         RectTransform rectTransform = holdItem.AddComponent<RectTransform>();
 
         rectTransform.localPosition = new Vector3(0, 0, -100);
-        if (itemName == "Log") rectTransform.localScale = new Vector3(50, 50, 50);
-        else rectTransform.localScale = new Vector3(20, 20, 20);
+
+        if (itemName == "Log")
+        {
+            rectTransform.localScale = new Vector3(50, 50, 50);
+        }
+        else if (itemName == "Bow" || itemName == "Sword")
+        {
+            rectTransform.localScale = new Vector3(50, 50, 50);
+        }
+        else
+        {
+            rectTransform.localScale = new Vector3(20, 20, 20);
+        }
         rectTransform.localRotation = Quaternion.Euler(new Vector3(-30, 30, 0));
 
         Destroy(holdItem.GetComponent<Rigidbody>());

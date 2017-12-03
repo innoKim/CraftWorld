@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23263805480654742}
   - component: {fileID: 114868577737483146}
   m_Layer: 0
-  m_Name: bow
+  m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,4 +96,5 @@ MonoBehaviour:
   weaponType: 2
   Damage: 1
   bullet: {fileID: 1975289952144822, guid: ef9cd907eea35444d9afb91d2ae6235f, type: 2}
-  eminPower: 0
+  emitPower: 0
+  maxPower: 0
