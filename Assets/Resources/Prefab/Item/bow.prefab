@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114868577737483146}
   m_Layer: 0
   m_Name: Bow
-  m_TagString: Untagged
+  m_TagString: EquipableItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   Damage: 1
   bullet: {fileID: 1975289952144822, guid: ef9cd907eea35444d9afb91d2ae6235f, type: 2}
   emitPower: 0
-  maxPower: 0
+  maxPower: 1000

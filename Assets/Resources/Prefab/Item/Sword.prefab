@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114148135968524112}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: EquipableItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,4 +96,5 @@ MonoBehaviour:
   weaponType: 1
   Damage: 1
   bullet: {fileID: 0}
-  eminPower: 0
+  emitPower: 0
+  maxPower: 0

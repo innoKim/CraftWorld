@@ -6,8 +6,18 @@ using UnityEngine.UI;
 public class ItemHolder : MonoBehaviour {
 
     public int inventoryIndex;
-    public GameObject holdItem;
-    
+    public GameObject holdItem = null;
+
+    Button btn;
+    InventoryUI invenPannel;
+
+    void Start()
+    {
+        invenPannel = transform.parent.GetComponent<InventoryUI>();
+        btn = GetComponent<Button>();
+        btn.onClick.AddListener(OnClick);
+    }
+
     void Update()
     {
         if(ItemManager.Instance.inventory.Count-1<inventoryIndex)
@@ -69,4 +79,9 @@ public class ItemHolder : MonoBehaviour {
         Destroy(holdItem);
         holdItem = null;
     }
+    
+    void OnClick()
+    {
+        invenPannel.SelectHolder(this.gameObject);
+    }    
 }

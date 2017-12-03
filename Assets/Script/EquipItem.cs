@@ -13,12 +13,10 @@ public class EquipItem : MonoBehaviour {
 
     public EquipType equipType;
 
-	// Use this for initialization
-	void Start () {
+    void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}

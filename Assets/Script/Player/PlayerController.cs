@@ -53,29 +53,26 @@ public class PlayerController : MonoBehaviour {
         Move();
         Jump();
 
-        if(player.weapon)
-        {
-            Attack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0)) anim.SetInteger("nWeapon", (int)player.weapon.weaponType);
+        Attack();
     }
 
     void Attack()
     {
-        if (player.weapon.weaponType != Weapon.WeaponType.Bow && Input.GetKeyDown(KeyCode.Mouse0))
+        if(player.weapon == null)
         {
-            anim.SetTrigger("isPunching");
-            if (!isPunching) StartCoroutine("MeleeAttack");
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                anim.SetTrigger("isPunching");
+                if (!isPunching) StartCoroutine("MeleeAttack");
+            }
         }
-
-        if (player.weapon.weaponType == Weapon.WeaponType.Bow)
+        else if (player.weapon.weaponType == Weapon.WeaponType.Bow)
         {
             if (Input.GetKeyUp(KeyCode.Mouse0))
-            {               
+            {
                 anim.speed = 1.0f;
             }
-            else if(Input.GetKeyDown(KeyCode.Mouse0))
+            else if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (!isPunching) StartCoroutine("ChargeAttack");
             }
@@ -85,6 +82,15 @@ public class PlayerController : MonoBehaviour {
                 else anim.speed = 0.0f;
             }
         }
+        else if (player.weapon.weaponType != Weapon.WeaponType.Bow)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                anim.SetTrigger("isPunching");
+                if (!isPunching) StartCoroutine("MeleeAttack");
+            }
+        }
+
     }
 
     void Jump()
@@ -209,7 +215,15 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
 
         if (hitted&&deltaVector.sqrMagnitude<2.0f)
-            hit.collider.gameObject.SendMessage("Damaged",GetComponent<Player>().weapon.Damage+1);
+        {
+            Weapon weapon = GetComponent<Player>().weapon;
+            if(weapon)
+            {
+                hit.collider.gameObject.SendMessage("Damaged", GetComponent<Player>().weapon.Damage + 1);
+            }
+            else hit.collider.gameObject.SendMessage("Damaged", 1);
+        }
+
 
         yield return new WaitForSeconds(0.5f);
         isPunching = false;

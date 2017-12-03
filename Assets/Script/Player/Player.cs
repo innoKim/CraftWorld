@@ -69,17 +69,22 @@ public class Player : ObjectBase, IDamageable {
         transform.position = origin;
     }
 
-    public void Equip(EquipItem item)
+    public void Equip(GameObject item)
     {
-        if(item.equipType == EquipItem.EquipType.Weapon)
+        Weapon ei = item.GetComponent<Weapon>();
+        if (ei)
         {
-            weapon = item as Weapon;
-            if (item != null) GetComponent<Animator>().SetInteger("nWeapon", ((int)weapon.weaponType));
+            if (weapon) Destroy(weapon.gameObject);
+            weapon = ei;
+            if (ei != null) GetComponent<Animator>().SetInteger("nWeapon", ((int)weapon.weaponType));
         }
-        else if(item.equipType == EquipItem.EquipType.Armor)
+
+        Armor ei2 = item.GetComponent<Armor>();
+        if (ei2)
         {
-            armor = item as Armor;
-        }        
+            if (armor) Destroy(armor.gameObject);
+            armor = ei2;
+        }
     }
     
     void Update()
