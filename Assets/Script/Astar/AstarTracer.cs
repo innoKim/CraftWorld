@@ -60,11 +60,6 @@ public class AstarTracer : MonoBehaviour {
                 }
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            isTracing = true;
-        }
     }
 
     void TracePath()
@@ -145,6 +140,19 @@ public class AstarTracer : MonoBehaviour {
     void Landing()
     {
         isJumping = false;
+    }
+
+    void GoTo(Transform target)
+    {
+        this.targetTransform = target;
+        isTracing = true;
+    }
+
+    void Stop()
+    {
+        isTracing = false;
+        afterNode = null;
+        path.Clear();
     }
 }
 

@@ -11,6 +11,7 @@ TagManager:
   - Rock
   - Item
   - EquipableItem
+  - Enemy
   layers:
   - Default
   - TransparentFX
