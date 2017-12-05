@@ -654,6 +654,7 @@ GameObject:
   - component: {fileID: 54967566627455832}
   - component: {fileID: 136851499144140842}
   - component: {fileID: 114168115438604700}
+  - component: {fileID: 114831741933721962}
   m_Layer: 8
   m_Name: Skeleton
   m_TagString: Enemy
@@ -1315,7 +1316,7 @@ Animator:
   m_GameObject: {fileID: 1157792899856914}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 994c35d10e93b0e47991140b53157799, type: 3}
-  m_Controller: {fileID: 9100000, guid: e65ac8d21f827f74891e66012940555c, type: 2}
+  m_Controller: {fileID: 9100000, guid: b7f2aebbf1ccc594f86194938d7e0dea, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1340,6 +1341,19 @@ MonoBehaviour:
   isTracing: 0
   isJumping: 0
   afterNodePos: {x: 0, y: 0, z: 0}
+--- !u!114 &114831741933721962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942437205204254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745cfb6c11b79cb449c91a1beb91842e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 5
+  curHp: 5
 --- !u!136 &136851499144140842
 CapsuleCollider:
   m_ObjectHideFlags: 1

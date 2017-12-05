@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114521222569550592}
   - component: {fileID: 65144483044638612}
   m_Layer: 8
-  m_Name: Horse
+  m_Name: horse
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

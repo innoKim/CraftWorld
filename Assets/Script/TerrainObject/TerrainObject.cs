@@ -7,10 +7,29 @@ public class TerrainObject : ObjectBase, IDamageable, IDropable {
     public int maxHp;
     public int curHp;
 
+    protected HealthBar hpBar = null;
+    public HealthBar HpBar
+    {
+        get
+        {
+            if (hpBar) return hpBar;
+            else
+            {
+                Debug.Log("new Hpbar");
+                GameObject temp = Instantiate(Resources.Load("Prefab/UI/HPBar")) as GameObject;
+                temp.transform.parent = this.transform;
+                temp.transform.localPosition = new Vector3(0, 0.6f, 0);
+                hpBar = temp.GetComponent<HealthBar>();
+                return hpBar;
+            }
+        }
+    }
+
     public virtual void Damaged(int damage)
     {
         curHp -= damage;
 
+        HpBar.SetProgressBar(maxHp, curHp);
         //temp[0] : 진동 사이즈, temp[1] : 진동 시간
         float[] temp = new float[2] { 0.05f, 0.2f };
         StartCoroutine("Vibrate", temp);
@@ -22,7 +41,7 @@ public class TerrainObject : ObjectBase, IDamageable, IDropable {
             Destroy(this.gameObject);
         }
     }
-
+    
     public virtual void Destroyed()
     {
         Destroy(this.gameObject);

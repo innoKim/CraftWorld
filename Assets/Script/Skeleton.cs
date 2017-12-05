@@ -13,7 +13,9 @@ public class Skeleton : Enemy {
 
     private void Update()
     {
-        if(SqrDistanceFromTraget()<attackSqrDist)
+        if(targetTransform == null) targetTransform = ObjectManager.Instance.player.transform;
+
+        if (SqrDistanceFromTraget()<attackSqrDist)
         {
             Attack();
         }
